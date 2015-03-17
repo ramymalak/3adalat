@@ -15,7 +15,7 @@ class Application_Form_Thread extends Zend_Form
      
         
         $threadBody = new Zend_Form_Element_Textarea("threadBody");
-        $threadBody->setAttrib('class', 'ckeditor');
+        $threadBody->setAttrib('id', 'txtContent');
         $threadBody->setLabel("Body: "."\n");
          $threadBody->setRequired();
          
