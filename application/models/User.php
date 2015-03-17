@@ -25,8 +25,8 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         require_once 'Zend/Mail/Transport/Smtp.php';
         
         $smtpServer = 'smtp.gmail.com';
-        $username = 'mramadan181291@gmail.com';
-        $password = 'p@$$w0rd0pen$0urcep@$$w0rd';
+        $username = '3adalatforum@gmail.com';
+        $password = '3adalatadmin';
         
         $config = array('ssl' => 'tls',
                 'auth' => 'login',
