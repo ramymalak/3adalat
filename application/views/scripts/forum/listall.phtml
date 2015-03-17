@@ -1,0 +1,19 @@
+<br /><br />
+<div align="center" style='margin: 0 auto;'>
+<?php
+echo "<a href=".$this->baseUrl()."/Forum/add/>Add Forum</a><br>";
+echo "<table border=1 style='text-align:center;'>";
+echo "<tr><td>Forum Name </td><td>Category Name</td><td>Action</td></tr>";
+for($i = 0; $i<count($this->forums); $i++){
+    echo "<tr><td>". $this->forums[$i]['forumName']."</td>"; 
+       for($j = 0; $j<count($this->categories); $j++){ 
+           if($this->forums[$i]['categoryID']==$this->categories[$j]['categoryID']){
+               echo "<td>".$this->categories[$j]['categoryName']."</td>"; 
+           }
+       }
+    echo "<td><a href=".$this->baseUrl()."/Forum/edit/forum_id/".$this->forums[$i]['forumID'].">Edit</a>";
+    echo "    <a href=".$this->baseUrl()."/Forum/delete/forum_id/".$this->forums[$i]['forumID'].">Delete</a></td></tr>";
+}
+echo "</table>";
+?>
+</div>

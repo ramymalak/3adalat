@@ -1,0 +1,22 @@
+<br /><br />
+<div align="center" style='margin: 0 auto;'>
+<?php
+for($i = 0; $i<count($this->categories); $i++){
+    
+            echo "<table border=1 style='text-align:center;'>";
+            echo "<tr><td  colspan='2'><a href=".$this->baseUrl()."/Category/listonecategory/cat_id/".$this->categories[$i]['categoryID'].">".$this->categories[$i]['categoryName']."</a></td></tr>";  
+
+            for($j = 0; $j<count($this->forums); $j++){
+                 if($this->forums[$j]['categoryID']==$this->categories[$i]['categoryID']){
+                    foreach ($this->forums[$j] as $key=>$value):
+                           if($key=='forumName'){
+                                echo "<tr><td>". $this->forums[$j]['forumName']."</td><td>ay 7aga</td></tr>";  
+                            } 
+                    endforeach;
+                 }   
+             }
+         echo "</table><br>";    
+  
+}
+?>
+</div>

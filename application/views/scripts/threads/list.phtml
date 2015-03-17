@@ -1,0 +1,18 @@
+<php
+    
+<?php
+for($i = 0; $i<count($this->threads); $i++){
+foreach ($this->threads[$i] as $key=>$value):
+    echo $key." ".$value ."<br />";
+endforeach;
+?>
+<a href="<?php echo $this->baseUrl()?>/Threads/edit/id/<?php echo $this->threads[$i]['threadID'];?>" > Edit </a>
+<a href="<?php echo $this->baseUrl()?>/Threads/delete/id/<?php echo $this->threads[$i]['threadID'];?>" > Delete </a>
+<br />
+<?php
+echo str_repeat("*", 80)."<br />";
+}
+?>
+
+    
+    

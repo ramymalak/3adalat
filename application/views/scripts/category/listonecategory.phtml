@@ -1,0 +1,19 @@
+<br /><br />
+<div align="center" style='margin: 0 auto;'>
+<?php
+
+ echo "<table border=1 style='text-align:center;'>";
+            echo "<tr><td  colspan='2'>".$this->category[0]['categoryName']."</td></tr>";  
+
+            for($j = 0; $j<count($this->forums); $j++){
+                     foreach ($this->forums[$j] as $key=>$value):
+                           if($key=='forumName'){
+                                echo "<tr><td>". $this->forums[$j]['forumName']."</td><td>ay 7aga</td></tr>";  
+                            } 
+                    endforeach;
+                 }   
+             
+         echo "</table><br>"; 
+
+?>
+</div>

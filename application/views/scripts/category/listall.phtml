@@ -1,0 +1,14 @@
+<br /><br />
+<div align="center" style='margin: 0 auto;'>
+<?php
+echo "<a href=".$this->baseUrl()."/Category/add/>Add Category</a><br>";
+echo "<table border=1 style='text-align:center;'>";
+echo "<tr><td>Category Name </td><td>Action</td></tr>";
+for($i = 0; $i<count($this->categories); $i++){
+    echo "<tr><td>". $this->categories[$i]['categoryName']."</td>";  
+    echo "<td><a href=".$this->baseUrl()."/Category/edit/cat_id/".$this->categories[$i]['categoryID'].">Edit</a>";
+    echo "    <a href=".$this->baseUrl()."/Category/delete/cat_id/".$this->categories[$i]['categoryID'].">Delete</a></td></tr>";
+}
+echo "</table>";
+?>
+</div>
