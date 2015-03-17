@@ -13,7 +13,7 @@ class ForumController extends Zend_Controller_Action
         // action body
     }
     
-    
+//amany    
      public function addAction()
       {
         //get all categories  

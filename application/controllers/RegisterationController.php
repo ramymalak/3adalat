@@ -21,6 +21,7 @@ class RegisterationController extends Zend_Controller_Action
     }
 
     // this is my func
+    // this is my awesome func
     public function adduserAction()
     {
         // action body
