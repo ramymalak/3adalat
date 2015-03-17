@@ -6,6 +6,7 @@ class CategoryController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+        //try git
     }
 
     public function indexAction()
