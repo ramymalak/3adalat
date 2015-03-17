@@ -25,7 +25,7 @@ class ThreadsController extends Zend_Controller_Action
                        
            }
        }
-       
+        $this->view->headScript()->appendFile('../js/tinymce/tinymce.min.js','text/javascript'); 
 	$this->view->form = $form;
 
     }
@@ -74,7 +74,7 @@ class ThreadsController extends Zend_Controller_Action
         }
         
        
-       
+       //$this->view->headScript()->appendFile('../js/tinymce/tinymce.min.js','text/javascript');
         $this->view->form = $form;
 	$this->render('add');
     }
