@@ -8,12 +8,9 @@ for($i = 0; $i<count($this->categories); $i++){
 
             for($j = 0; $j<count($this->forums); $j++){
                  if($this->forums[$j]['categoryID']==$this->categories[$i]['categoryID']){
-                    foreach ($this->forums[$j] as $key=>$value):
-                           if($key=='forumName'){
-                                echo "<tr><td>". $this->forums[$j]['forumName']."</td><td>ay 7aga</td></tr>";  
-                            } 
-                    endforeach;
-                 }   
+                       echo "<tr><td><a href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID'].">". $this->forums[$j]['forumName']."</a></td>"
+                                        . "<td>ay 7aga</td></tr>";  
+                   }   
              }
          echo "</table><br>";    
   

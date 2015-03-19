@@ -1,0 +1,72 @@
+<?php
+$thread=$this->thread[0];
+
+echo "<font color='red'>Thread Title : </font><br>";
+echo $this->thread[0]['threadTitle'];
+echo "<br>";
+echo "<font color='red'>Thread Body : </font><br>";
+echo $this->thread[0]['threadBody'];
+echo "<br><br>";
+echo "<font color='red'>Comment : </font><br>";
+
+?>
+
+
+    <br/>
+<textarea rows="5" cols="50" id="reply"></textarea><br/>
+<input type="button" value="add comment" onclick="addcomment()"></input>
+<input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
+<input type="text" id="user" value=<?php echo $thread['userID'] ?> hidden>  </input>
+<br/><br/>
+
+
+<?php
+
+        for($i=0;$i<count($this->reply);$i++){
+
+                    echo "<div>";
+                    echo "user num: ".$this->reply[$i]['userID']."<br/>";                   
+                    echo $this->reply[$i]['replayBody']."<br/>"; 
+                    echo "*************************************************";
+                    echo "</div>";
+            
+        }
+
+?>
+<body>
+<script>
+function addcomment(){
+    
+    
+  var newcomm=document.getElementById("reply");  
+  var addnew=document.createElement("div");
+    addnew.innerHTML="user num: "+document.getElementById("user").value+"<br/>"+newcomm.value+"<br/>"+"*************************************************"+"<br/>";
+    document.body.appendChild(addnew);
+    if(window.XMLHttpRequest){
+
+            ajaxRequest = new XMLHttpRequest();
+
+    }else{
+
+	ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    query=newcomm.value;
+    ajaxRequest.open("GET","../../../replay/add/q/"+query+"/thread_id/"+document.getElementById("thread_id").value,true);
+    ajaxRequest.send();
+
+
+
+        ajaxRequest.onreadystatechange=function(){
+               if(ajaxRequest.readyState==4 && ajaxRequest.status==200){
+                       console.log("succes");  
+
+                }
+        }
+ 
+ 
+            newcomm.value="";
+ 
+    }
+</script>
+</body>

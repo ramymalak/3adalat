@@ -32,18 +32,17 @@ class Application_Model_Forum extends Zend_Db_Table_Abstract
         return $this->delete("forumID =$id");
     }
     //edit forum
-    function editForum($data){
+    function editForum($data,$categoryID){
+              
+      unset ($data['category']);  
+        
       if(!empty($data['forumName']))
             $data['forumName']=$data['forumName'];
         else
-            unset ($data['forumName']);
-        
+            unset ($data['forumName']);     
            
-      if(!empty($data['categoryID']))
-            $data['categoryID']=$data['categoryID'];
-        else
-            unset ($data['categoryID']);
-        
+        $data['categoryID']=$categoryID;
+              
        if(!empty($data['forumID']))
             $data['forumID']=$data['forumID'];
         else
