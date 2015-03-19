@@ -1,0 +1,25 @@
+<br /><br />
+<div align="center" style='margin: 0 auto;'>
+<?php
+echo "<a href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID'].">Add Thread</a>";
+ echo "<table border=1 style='text-align:center;'>";
+            echo "<tr><td  colspan='2'>".$this->forum[0]['forumName']."</td></tr>";  
+               //sticky threads
+            for($j = 0; $j<count($this->threads); $j++){
+                if($this->threads[$j]['isSticky']==1){
+                    echo "<tr><td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$j]['threadID'].">"
+                    . $this->threads[$j]['threadTitle']."</a></td><"
+                         . "td><font color='red'>** Sticky</font></td></tr>";  
+                }   
+              
+              } 
+              //unstick threads
+             for($j = 0; $j<count($this->threads); $j++){
+                if($this->threads[$j]['isSticky']==0){
+                 echo "<tr><td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$j]['threadID'].">"
+                    . $this->threads[$j]['threadTitle']."</a></td><td>ay 7aga</td></tr>";  
+                }   
+              
+              } 
+?>
+</div>

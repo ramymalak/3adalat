@@ -1,18 +1,42 @@
-<php
-    
+   
+ <br /><br />
+<div align="center" style='margin: 0 auto;'>
 <?php
-for($i = 0; $i<count($this->threads); $i++){
-foreach ($this->threads[$i] as $key=>$value):
-    echo $key." ".$value ."<br />";
-endforeach;
-?>
-<a href="<?php echo $this->baseUrl()?>/Threads/edit/id/<?php echo $this->threads[$i]['threadID'];?>" > Edit </a>
-<a href="<?php echo $this->baseUrl()?>/Threads/delete/id/<?php echo $this->threads[$i]['threadID'];?>" > Delete </a>
-<br />
-<?php
-echo str_repeat("*", 80)."<br />";
-}
-?>
 
+echo "<table border=1 style='text-align:center;'>";
+echo "<tr><td>Thread Title</td><td>Thread Body</td><td>Forum Name</td><td>Action</td></tr>";
+for($i = 0; $i<count($this->threads); $i++){
+    
+    echo "<tr><td>". $this->threads[$i]['threadTitle']."</td>"; 
+    echo "<td>". $this->threads[$i]['threadBody']."</td>";
+    
+    for($j = 0; $j<count($this->forums); $j++){
+            if($this->forums[$j]['forumID']==$this->threads[$i]['forumID']){
+                 echo "<td>". $this->forums[$j]['forumName']."</td>"; 
+            }
+    }
+    
+    echo "<td><a href=".$this->baseUrl()."/Threads/edit/id/".$this->threads[$i]['threadID'].">Edit</a>";
+    echo "    <a href=".$this->baseUrl()."/Threads/delete/id/".$this->threads[$i]['threadID'].">Delete</a>";
+    //
+    if($this->threads[$i]['isSticky']==1){
+            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isSticky>Sticky</a>";
+    }  else {
+            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isSticky>UnSticky</a>";
+
+    }
+    //
+    
+     if($this->threads[$i]['isLocked']==1){
+            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isLocked>Locked</a></td></tr>";
+    }  else {
+            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isLocked>Unlocked</a></td></tr>";
+
+    }
     
     
+    //
+    }
+echo "</table>";
+?>
+</div>   

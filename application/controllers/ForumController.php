@@ -59,6 +59,7 @@ class ForumController extends Zend_Controller_Action
                         endforeach;
                         //add forum
                         $forum_model->addForum($forum_info['forumName'],$id);
+                        $this->redirect("/category/listonecategory/cat_id/".$id);
                     }
 
                 }
@@ -113,9 +114,29 @@ class ForumController extends Zend_Controller_Action
         $form  = new Application_Form_Forum();
         $form->getElement("forumName")->setRequired(false);
         //$form->getElement("select")->setRequired(false);
+        
+        //data about this forum
         $forum_model = new Application_Model_Forum();
+        $forum = $forum_model ->getForumById($forum_id);
+        $cat_model = new Application_Model_Category();
+        $selected_category=$cat_model->getCategoryById($forum[0]['categoryID']);
+        
+        //add categories into combo box 
+        $result=$cat_model->listCategories();
+        for($i = 0; $i<count($result); $i++){
+            foreach ($result[$i] as $key=>$value):
+                if($key=="categoryName"){
+                    $form->getElement("category")->addMultiOption($result[$i]['categoryID'],$value);
+                    if($value==$selected_category[0]['categoryName'])
+                    {
+                     $form->getElement("category")->setValue($result[$i]['categoryID']);   
+                    }
+                }    
+             endforeach;
+         }
+            
+        
         if(!empty($forum_id)){
-                $forum = $forum_model ->getForumById($forum_id);
                 $form->populate($forum[0]);
         }else{
                 $this->redirect("forum/listall");
@@ -125,7 +146,7 @@ class ForumController extends Zend_Controller_Action
             if($form->isValid($this->_request->getParams())){
                 $forum_info = $form->getValues();
                 $forum_model = new Application_Model_Forum();
-                $forum_model->editForum($forum_info);
+                $forum_model->editForum($forum_info,$forum_info['category']);
                 $this->redirect("Forum/listall");
             }
         
@@ -139,6 +160,26 @@ class ForumController extends Zend_Controller_Action
       
 
 ///////////////////////////////////////////////////////
+    
+    public function listoneforumAction()
+    {
+        $forum_id= $this->_request->getParam("forum_id");
+        $forum_model = new Application_Model_Forum();
+        $forum=$forum_model->getForumById($forum_id);
+        $this->view->forum = $forum;
+        
+       
+        $thread_model = new Application_Model_Thread();
+        $threads=$thread_model->listThreadsByForumId($forum_id);
+        $this->view->threads = $threads;
+     
+    } 
+    
+    
+    
+    
+    
+    ///////////////////////////////////////////////////////
 }
 
 
