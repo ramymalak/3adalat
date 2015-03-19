@@ -9,7 +9,7 @@ foreach ($this->users[$i] as $key=>$value):
     echo $key." ".$value ."<br />";
 endforeach;
 ?>
-<a href="<?php echo $this->baseUrl()?>/user/edit/id/<?php echo $this->users[$i]['userID']."/username/"; echo $this->users[$i]['userName']
+<a href="<?php echo $this->baseUrl()?>/user/edit/userID/<?php echo $this->users[$i]['userID']."/username/"; echo $this->users[$i]['userName']
         . "";?>" > Edit </a>
 <a href="<?php echo $this->baseUrl()?>/user/delete/userID/<?php echo $this->users[$i]['userID'];?>" > Delete </a>
 <br />

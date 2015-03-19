@@ -41,11 +41,13 @@ class UserController extends Zend_Controller_Action
     public function deleteAction()
     {
         // action body
-        $id = $this->_request->getParam("id");
+        $id = $this->_request->getParam("userID");
         if(!empty($id)){
             $user_model = new Application_Model_User();
             $user_model->deleteUser($id);
+            
         }
+        $this->redirect("user/list");
     }
 
     public function editAction()
@@ -53,26 +55,28 @@ class UserController extends Zend_Controller_Action
         // action body
         $userID = $this->_request->getParam("userID");
         $form  = new Application_Form_Signup();
+        $form->getElement("password")->setRequired(false);
+        $form->getElement("userEmail")->removeValidator("Db_NoRecordExists");
+        $form->getElement("passwordConfirm")->setRequired(false);
+        
         if($this->_request->isPost()){
+            
            if($form->isValid($this->_request->getParams())){
                $user_info = $form->getValues();
                $user_model = new Application_Model_User();
                $user_model->editUser($user_info);
-               
-                       
+                    
            }
-        if(!empty($userID)){
+       }
+       if(!empty($userID)){
             $user_model = new Application_Model_User();
             $user = $user_model->getUserById($userID);
-            var_dump($user);
-            
+            var_dump($user[0]);
             $form->populate($user[0]);
-        } else
+        } else{
             $this->redirect("user/list");
-        
-        
-       }
-       $form->getElement("password")->setRequired(false);
+        }
+       
         $this->view->form = $form;
 	$this->render('add');
     }

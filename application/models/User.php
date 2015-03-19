@@ -33,12 +33,12 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         $transport = new Zend_Mail_Transport_Smtp($smtpServer, $config);
         $mail = new Zend_Mail();
 
-        $mail->setFrom('mramadan181291@gmail.com', '3adalat team');
-        $mail->addTo($data["email"], $data["username"]);
+        $mail->setFrom('3adalatforum@gmail.com', '3adalat team');
+        $mail->addTo($data["userEmail"], $data["userName"]);
         $mail->setSubject('3adalat register success !');
         $mail->setBodyText("Your personal data on 3adalat.net is : "."\n"
-                . "User name:".$data["username"]."\n"
-                . "Mail address: ".$data["email"]."\n"
+                . "User name:".$data["userName"]."\n"
+                . "Mail address: ".$data["userEmail"]."\n"
                 . "Gender: ".$data["gender"]."\n"
                 . "Country: ".$data["country"]."\n"
                 . "Thanks for join 3adalat :) ");
@@ -51,8 +51,8 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         
         // Save to database
         $row = $this->createRow();
-        $row -> userName  = $data["username"];
-        $row -> userEmail = $data["email"];
+        $row -> userName  = $data["userName"];
+        $row -> userEmail = $data["userEmail"];
         $row -> password  = md5($data["password"]);
         $row -> gender    = $data["gender"];
         $row -> country   = $data["country"];
@@ -73,10 +73,16 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     
     
      function editUser($data){
-        if(!empty($data['password']))
-            $data['password']=md5($data['password']);
-        else
+        if(!empty($data['password'])){
+            if($data['password']==$data['passwordConfirm']){
+                $data['password']=md5($data['password']);
+                unset ($data['passwordConfirm']);
+            }
+            
+        }else{
             unset ($data['password']);
+            unset ($data['passwordConfirm']);
+        }
         $this->update($data, "userID=".$data['userID']);
         return $this->fetchAll()->toArray();
     }
