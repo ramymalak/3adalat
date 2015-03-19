@@ -27,7 +27,7 @@ class ThreadsController extends Zend_Controller_Action
                        
            }
        }
-        $this->view->headScript()->appendFile('../js/tinymce/tinymce.min.js','text/javascript'); 
+        $this->view->headScript()->appendFile('../../../js/tinymce/tinymce.min.js','text/javascript'); 
 	$this->view->form = $form;
 
     }
@@ -57,7 +57,7 @@ class ThreadsController extends Zend_Controller_Action
             $thread_model = new Application_Model_Thread();
             $thread_model->deleteTread($id);
         }
-            $this->redirect("Threads/list");
+            $this->redirect("Threads/list/");
       
     }
     //////////////////////////////////////////////////
@@ -85,11 +85,11 @@ class ThreadsController extends Zend_Controller_Action
             
             $form->populate($thread[0]);
         } else{
-            $this->redirect("Threads/list");
+            $this->redirect("Threads/list/");
         }
         
        
-       //$this->view->headScript()->appendFile('../js/tinymce/tinymce.min.js','text/javascript');
+       $this->view->headScript()->appendFile('../../../js/tinymce/tinymce.min.js','text/javascript');
         $this->view->form = $form;
 	$this->render('add');
     }
@@ -106,7 +106,7 @@ class ThreadsController extends Zend_Controller_Action
             $thread_model->updateStatus($column,$status,$id);
 
         }
-            $this->redirect("Threads/list");
+            $this->redirect("Threads/list/");
       
     }
     /////////////////////////////////////////////////
