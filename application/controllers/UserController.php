@@ -5,7 +5,9 @@ class UserController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity() && $this->_request->getActionName()!='login') 
+            { $this->redirect("user/login"); }
     }
 
     public function indexAction()
@@ -99,8 +101,56 @@ class UserController extends Zend_Controller_Action
         $this->view->form = $form;
 	$this->render('add');
     }
+    ///////////////////////////////////////
+    public function loginAction()
+    {
+       $form  = new Application_Form_Signup();
+       $form->removeElement("userName");
+       $form->removeElement("passwordConfirm");
+       $form->removeElement("country");
+       $form->removeElement("gender");
+       $form->removeElement("photo");
+       $form->removeElement("reset");
+       $form->getElement("userEmail")->removeValidator('Db_NoRecordExists');
+       $this->view->form = $form;
+       if($this->_request->isPost()){
+           if($form->isValid($this->_request->getParams())){
+               $email = $form->getValue("userEmail");
+               $password = $form->getValue("password");
+               $db =Zend_Db_Table::getDefaultAdapter();
+               $auth = new Zend_Auth_Adapter_DbTable($db,'users','userEmail', 'password');
+               $auth->setIdentity($email);
+               $auth->setCredential(md5($password));
+                
+               $result = $auth->authenticate();
+               if ($result->isValid()) {
+                 $autho =Zend_Auth::getInstance();
+                 $storage = $autho->getStorage();
+                 $storage->write($auth->getResultRowObject(array('userName' , 'photo' , 'isAdmin','isBan')));
+                 
+                 $this->redirect("forum/home");
+                      //exit();
+                 }else{
+                     $this->view->form = $form;
+                    }
+                       
+           }
+       }
+        
+    }
+    
+  ////////////////////////////////////////////////
+    
+     public function logoutAction()
+    {
+         session_destroy();
+         $this->redirect("user/login");
+         
+    }
+    
+    
 
-
+//////////////////////////////////////////////
 }
 
 

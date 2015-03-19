@@ -1,8 +1,17 @@
 <br /><br />
 <div align="center" style='margin: 0 auto;'>
 <?php
-echo "<a href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID'].">Add Thread</a>";
- echo "<table border=1 style='text-align:center;'>";
+
+$userInfo = Zend_Auth::getInstance()->getStorage()->read();
+
+if ($userInfo->isAdmin==1){//if he was admin allow him to add thread 
+        echo "<a href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID'].">Add Thread</a>";
+}else{//normal user
+        if ($this->forum[0]['isLocked']==0){ //if it was normal user and forum is not Locked
+              echo "<a href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID'].">Add Thread</a>";
+        }
+}   
+echo "<table border=1 style='text-align:center;'>";
             echo "<tr><td  colspan='2'>".$this->forum[0]['forumName']."</td></tr>";  
                //sticky threads
             for($j = 0; $j<count($this->threads); $j++){

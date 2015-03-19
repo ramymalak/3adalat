@@ -1,6 +1,9 @@
 <?php
 $thread=$this->thread[0];
 
+//get data from session
+$userInfo = Zend_Auth::getInstance()->getStorage()->read();
+
 echo "<font color='red'>Thread Title : </font><br>";
 echo $this->thread[0]['threadTitle'];
 echo "<br>";
@@ -9,10 +12,12 @@ echo $this->thread[0]['threadBody'];
 echo "<br><br>";
 echo "<font color='red'>Comment : </font><br>";
 
+if ($userInfo->isAdmin==1){//if he was admin
+
 ?>
 
 
-    <br/>
+ <br/>
 <textarea rows="5" cols="50" id="reply"></textarea><br/>
 <input type="button" value="add comment" onclick="addcomment()"></input>
 <input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
@@ -21,6 +26,22 @@ echo "<font color='red'>Comment : </font><br>";
 
 
 <?php
+}  else {//normal user
+    if ($this->thread[0]['isLocked']==0){ //if it was normal user and thread is not Locked
+        
+   ?>
+        <br/>
+       <textarea rows="5" cols="50" id="reply"></textarea><br/>
+       <input type="button" value="add comment" onclick="addcomment()"></input>
+       <input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
+       <input type="text" id="user" value=<?php echo $thread['userID'] ?> hidden>  </input>
+       <br/><br/>
+
+<?php
+        
+    }
+    
+}
 
         for($i=0;$i<count($this->reply);$i++){
 
