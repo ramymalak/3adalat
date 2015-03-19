@@ -100,6 +100,17 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         
         return $this->delete("userID=$userID");
     }
+    
+    function invbanUser($userID){
+        
+        $theusr=$this->find($userID)->toArray();
+        if($theusr[0]['isBan']){
+            $data['isBan']=false;
+        }else{
+           $data['isBan']=true; 
+        }
+        return $this->update($data, "userID=".$userID);
+    }
 
     
     

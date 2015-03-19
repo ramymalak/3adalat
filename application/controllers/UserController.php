@@ -49,6 +49,22 @@ class UserController extends Zend_Controller_Action
         }
         $this->redirect("user/list");
     }
+    
+    
+    public function banAction()
+    {
+        // action body
+        $id = $this->_request->getParam("userID");
+        if(!empty($id)){
+            $user_model = new Application_Model_User();
+            $user_model->invbanUser($id);
+            
+        }
+        $this->redirect("user/list");
+    }
+    
+    
+    
 
     public function editAction()
     {

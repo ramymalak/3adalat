@@ -8,6 +8,7 @@ endforeach;
 ?>
 <a href="<?php echo $this->baseUrl()?>/user/edit/userID/<?php echo $this->users[$i]['userID'];?>" > Edit </a>
 <a href="<?php echo $this->baseUrl()?>/user/delete/userID/<?php echo $this->users[$i]['userID'];?>" > Delete </a>
+<a href="<?php echo $this->baseUrl()?>/user/ban/userID/<?php echo $this->users[$i]['userID'];?>" > <?php if($this->users[$i]['isBan']==0){echo "Ban";}else{echo "unBan";}  ?> </a>
 <br />
 <?php
 echo str_repeat("*", 80)."<br />";
