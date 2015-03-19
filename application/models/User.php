@@ -14,9 +14,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
      * @return int number of affected rows
      */
     function addUser($data){
-        
-        
-        
+ 
         // send email with user data to his email address
         $currentFilePath = dirname(realpath(__FILE__));
         set_include_path($currentFilePath . '/../../library/' . PATH_SEPARATOR . get_include_path());
@@ -47,7 +45,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         $mail->send($transport);
         
         // print the default photo
-        echo "<img src='img/default.jpeg' width='100px' height='100px' /> ";
+        //echo "<img src='img/default.jpeg' width='100px' height='100px' /> ";
         
         
         
@@ -60,32 +58,38 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         $row -> country   = $data["country"];
         $row -> photo     = "public/img/".$data["photo"];
         return $row->save();
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-        $mail = new Zend_Mail();
-        $mail->setFrom("mramadan181291@gmail.com");
-        $mail->addTo($data["email"]);
-        $mail->setSubject("3adalat registeration Success !");
-        $mail->setBodyText(
-                  "Your personal data on 3adalat.net is : "."\n"
-                . "user name:".$data["username"]."\n"
-                . "email address".$data["email"]."\n"
-                . "gender".$data["gender"]."\n"
-                . "country".$data["country"]."\n"
-                . "Thanks for join 3adalat :) ");
-        $mail->send();
-        */
     }
 
 
+    function listUsers(){
+        
+        return $this->fetchAll()->toArray();
+    }
+    
+    
+    function getUserById($userID){
+        return $this->find($userID)->toArray();
+    }
+    
+    
+     function editUser($data){
+        if(!empty($data['password']))
+            $data['password']=md5($data['password']);
+        else
+            unset ($data['password']);
+        $this->update($data, "userID=".$data['userID']);
+        return $this->fetchAll()->toArray();
+    }
+    
+    
+    function deleteUser($userID){
+        
+        return $this->delete("userID=$userID");
+    }
+
+    
+    
+    
+    
 }
 

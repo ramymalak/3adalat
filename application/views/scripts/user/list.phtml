@@ -1,0 +1,19 @@
+<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>User</b> and script/action name <b>list</b></p>
+</div>
+<?php
+var_dump($this->users[0]);
+for($i = 0; $i<count($this->users); $i++){
+foreach ($this->users[$i] as $key=>$value):
+    echo $key." ".$value ."<br />";
+endforeach;
+?>
+<a href="<?php echo $this->baseUrl()?>/user/edit/id/<?php echo $this->users[$i]['userID']."/username/"; echo $this->users[$i]['userName']
+        . "";?>" > Edit </a>
+<a href="<?php echo $this->baseUrl()?>/user/delete/userID/<?php echo $this->users[$i]['userID'];?>" > Delete </a>
+<br />
+<?php
+echo str_repeat("*", 80)."<br />";
+}
+?>
