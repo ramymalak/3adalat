@@ -8,14 +8,18 @@ class Application_Form_Signup extends Zend_Form
         /* Form Elements & Other Definitions Here ... */
 	$this->setMethod("post");
         
-	$username = new Zend_Form_Element_Text("username");
+        
+//        $userID = new Zend_Form_Element_Hidden("userID");
+//        $userID->setAttrib("value", "9");
+        
+	$username = new Zend_Form_Element_Text("userName");
         $username -> setRequired()-> setLabel("Username: ");
         $username -> setAttrib("class", "form-control");
         $username -> setAttrib("placeholder", "Enter your Name");
 
 
 
-	$email = new Zend_Form_Element_Text('email');
+	$email = new Zend_Form_Element_Text('userEmail');
         $email -> setLabel("Email: ");
         $email -> setAttrib("class", "form-control");
         $email-> setAttrib("placeholder", "you@example.com");
