@@ -6,36 +6,49 @@ class ThreadsController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
-        //ay kalma
     }
 
     public function indexAction()
     {
         // action body
     }
-
+/////////////////////////////////////////////////////////////////
     public function addAction()
     {
+       $forum_id= $this->_request->getParam("forum_id");
        $form  = new Application_Form_Thread();
        
        if($this->_request->isPost()){
            if($form->isValid($this->_request->getParams())){
                $thread_info = $form->getValues();
                $thread_model = new Application_Model_Thread();
-               $thread_model->addTread($thread_info);
+               $thread_model->addTread($thread_info,$forum_id);
+               $this->redirect("/Forum/listoneforum/forum_id/".$forum_id);
                        
            }
        }
-        $this->view->headScript()->appendFile('/3adalat/public/js/tinymce/tinymce.min.js','text/javascript'); 
+        $this->view->headScript()->appendFile('../js/tinymce/tinymce.min.js','text/javascript'); 
 	$this->view->form = $form;
 
     }
+  ///////////////////////////////////////////////////////////////////  
     public function listAction()
     {
+          //send all categories
+          $cat_model = new Application_Model_Category();
+          $categories=$cat_model->listCategories();
+          $this->view->categories = $categories;
+          //send all forums
+          $forum_model = new Application_Model_Forum();
+          $forums=$forum_model->listForums();
+          $this->view->forums = $forums;
+          //send all threads
           $thread_model = new Application_Model_Thread();
           $this->view->threads=$thread_model->listTread();
+          
 
     }
+    ///////////////////////////////////////////////////////////
      public function deleteAction()
     {
         
@@ -47,6 +60,7 @@ class ThreadsController extends Zend_Controller_Action
             $this->redirect("Threads/list");
       
     }
+    //////////////////////////////////////////////////
     public function editAction()
     {
         
@@ -75,9 +89,41 @@ class ThreadsController extends Zend_Controller_Action
         }
         
        
-       $this->view->headScript()->appendFile('/3adalat/public/js/tinymce/tinymce.min.js','text/javascript');
+       //$this->view->headScript()->appendFile('../js/tinymce/tinymce.min.js','text/javascript');
         $this->view->form = $form;
 	$this->render('add');
     }
+    /////////////////////////////////////////////////
+    public function statusAction()
+    {
+        $id = $this->_request->getParam("id");
+        $column = $this->_request->getParam("column");
+        $status=$this->_request->getParam("status");
+        if(!empty($column)){
+            
+            $thread_model = new Application_Model_Thread();
+            
+            $thread_model->updateStatus($column,$status,$id);
 
+        }
+            $this->redirect("Threads/list");
+      
+    }
+    /////////////////////////////////////////////////
+        public function listonethreadAction()
+        {
+            $thread_id= $this->_request->getParam("thread_id");
+            $thread_model = new Application_Model_Thread();
+            $thread=$thread_model->getTreadById($thread_id);
+            $this->view->thread = $thread;
+
+
+            $reply_model = new Application_Model_Replay();
+            $reply=$reply_model->listRepliesByThreadId($thread_id);
+            $this->view->reply = $reply;
+
+        } 
+    
+    
+    /////////////////////////////////////////////////
 }
