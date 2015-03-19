@@ -72,18 +72,26 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     
-     function editUser($data){
+     function editUser($data,$theid){
+         
+        if(empty($data['photo'])){
+            unset ($data['photo']);
+        }
+         
         if(!empty($data['password'])){
             if($data['password']==$data['passwordConfirm']){
                 $data['password']=md5($data['password']);
                 unset ($data['passwordConfirm']);
+                
+            }else{
+                return 1;
             }
             
         }else{
             unset ($data['password']);
             unset ($data['passwordConfirm']);
         }
-        $this->update($data, "userID=".$data['userID']);
+        $this->update($data, "userID=".$theid);
         return $this->fetchAll()->toArray();
     }
     

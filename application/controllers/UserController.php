@@ -63,15 +63,18 @@ class UserController extends Zend_Controller_Action
             
            if($form->isValid($this->_request->getParams())){
                $user_info = $form->getValues();
+               //var_dump($user_info);
+               //exit;
                $user_model = new Application_Model_User();
-               $user_model->editUser($user_info);
+               $user_model->editUser($user_info,$userID);
+               
                     
            }
        }
        if(!empty($userID)){
             $user_model = new Application_Model_User();
             $user = $user_model->getUserById($userID);
-            var_dump($user[0]);
+            //var_dump($user[0]);
             $form->populate($user[0]);
         } else{
             $this->redirect("user/list");
