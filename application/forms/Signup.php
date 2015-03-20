@@ -58,6 +58,19 @@ class Application_Form_Signup extends Zend_Form
 	$photo = new Zend_Form_Element_File('photo');
 	$photo -> setLabel('Upload your photo: ');
 	$photo -> setAttrib("class","form-control");
+        
+        
+        $photo->setDestination("../public/img");
+        // ensure only one file
+        $photo->addValidator('Count', false, 1);
+        // max 2MB
+        $photo->addValidator('Size', false, 2097152)
+              ->setMaxFileSize(2097152);
+        // only JPEG, PNG, or GIF
+        $photo->addValidator('Extension', false, 'jpg,png,gif');
+        $photo->setValueDisabled(true);
+        
+        
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit -> setAttrib("value", "Submit");
