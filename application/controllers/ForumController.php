@@ -5,7 +5,9 @@ class ForumController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity() && $this->_request->getActionName()!='login') 
+            { $this->redirect("user/login"); }
     }
 
     public function indexAction()
@@ -177,9 +179,27 @@ class ForumController extends Zend_Controller_Action
     
     
     
+    /////////////////////////////////////////////////
+    public function statusAction()
+    {
+        $id = $this->_request->getParam("id");
+        $column = $this->_request->getParam("column");
+        $status=$this->_request->getParam("status");
+        if(!empty($column)){
+            
+        $forum_model = new Application_Model_Forum();
+            
+          $forum_model->updateStatus($column,$status,$id);
+
+        }
+            $this->redirect("Forum/listall");
+      
+    }
+    /////////////////////////////////////////////////
     
     
-    ///////////////////////////////////////////////////////
+    
+    
 }
 
 

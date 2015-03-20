@@ -57,7 +57,16 @@ class Application_Model_Forum extends Zend_Db_Table_Abstract
         $this->update($data, "forumID=".$data['forumID']);
         return $this->fetchAll()->toArray();
     }
+       ///////////////////////////////////////
+    //update sticky or lock
+    function updateStatus($column,$status,$id){
+        
+        $data = array($column => $status);
+        $this->update($data,'forumID = '.$id);
+        return $this->fetchAll()->toArray();   
+      }
     
+    ///////////////////////////////////////
     
 }
 
