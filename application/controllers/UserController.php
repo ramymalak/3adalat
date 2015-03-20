@@ -104,13 +104,15 @@ class UserController extends Zend_Controller_Action
     ///////////////////////////////////////
     public function loginAction()
     {
+        // disable master layout
+       $this->_helper->layout->disableLayout();
        $form  = new Application_Form_Signup();
        $form->removeElement("userName");
        $form->removeElement("passwordConfirm");
        $form->removeElement("country");
        $form->removeElement("gender");
        $form->removeElement("photo");
-       $form->removeElement("reset");
+       //$form->removeElement("reset");
        $form->getElement("userEmail")->removeValidator('Db_NoRecordExists');
        $this->view->form = $form;
        if($this->_request->isPost()){

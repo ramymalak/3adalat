@@ -8,18 +8,23 @@ class Application_Form_Login extends Zend_Form
     {
               
         $email = new Zend_Form_Element_Text("userEmail");
-         $email->setRequired()
+        $email->setRequired()
                 ->setLabel("Email:")
-                 ->addValidator(new Zend_Validate_EmailAddress());
+                ->setAttrib("class", "form-control")
+                ->addValidator(new Zend_Validate_EmailAddress());
 
          
          $password = new Zend_Form_Element_Password("password");
          $password->setRequired()
+                 ->setAttrib("class", "form-control")
                  ->setLabel("Password:");
          
         
-         $submit = new Zend_Form_Element_Submit("submit");
-         $this->addElements(array($email,$password,$submit));
+         $submit = new Zend_Form_Element_Submit("Log in");
+         $submit-> setAttrib("class", "btn btn-success");
+         $reset =new Zend_Form_Element_Reset("Reset");
+         $reset->setAttrib("class", "btn btn-danger");
+         $this->addElements(array($email,$password,$submit,$reset));
         
         
     }
