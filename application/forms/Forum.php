@@ -5,6 +5,7 @@ class Application_Form_Forum extends Zend_Form
 
     public function init()
     {
+        $this->setAttrib("class", "form-horizontal");
         $this->setMethod("post");
         $forumName = new Zend_Form_Element_Text("forumName");
         $forumName ->setAttrib("class", "form-control");
@@ -20,8 +21,14 @@ class Application_Form_Forum extends Zend_Form
         $category_id = new Zend_Form_Element_Hidden("categoryID");
         $forumID = new Zend_Form_Element_Hidden("forumID");
         
-        $submit = new Zend_Form_Element_Submit("submit");
-        $this->addElements(array($forumName,$category,$forumID,$category_id,$submit));
+        $submit = new Zend_Form_Element_Submit("Save");
+        $submit->setAttrib("class", "btn btn-success");
+        $submit->setAttrib("id", "savebtn");
+        
+        $reset = new Zend_Form_Element_Reset("Cancel");
+        $reset->setAttrib("class", "btn btn-danger");
+        $reset->setAttrib("id", "cancelbtn");
+        $this->addElements(array($forumName,$category,$forumID,$category_id,$submit,$reset));
     }
 
 

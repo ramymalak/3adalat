@@ -7,7 +7,7 @@ class Application_Form_Signup extends Zend_Form
     {
         /* Form Elements & Other Definitions Here ... */
 	$this->setMethod("post");
-        
+        $this->setAttrib("calss", "form form-horizontal");
         
 //        $userID = new Zend_Form_Element_Hidden("userID");
 //        $userID->setAttrib("value", "9");

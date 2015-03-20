@@ -1,19 +1,22 @@
-<br /><br />
-<div align="center" style='margin: 0 auto;'>
+<div class="container">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><h1><strong>New Feeds</strong></h1></div>
+        <div class="panel-body">
 <?php
 for($i = 0; $i<count($this->categories); $i++){
-    
-            echo "<table border=1 style='text-align:center;'>";
-            echo "<tr><td  colspan='2'><a href=".$this->baseUrl()."/Category/listonecategory/cat_id/".$this->categories[$i]['categoryID'].">".$this->categories[$i]['categoryName']."</a></td></tr>";  
+    echo "  <div class='panel panel-danger'> <div class='panel-body'>" ;
+            echo "<table class='table table-responsive'>";
+            echo "<tr><td  colspan='2'><a class='btn btn-info' href=".$this->baseUrl()."/Category/listonecategory/cat_id/".$this->categories[$i]['categoryID'].">".$this->categories[$i]['categoryName']." category"."</a></td></tr>";  
 
             for($j = 0; $j<count($this->forums); $j++){
                  if($this->forums[$j]['categoryID']==$this->categories[$i]['categoryID']){
-                       echo "<tr><td><a href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID'].">". $this->forums[$j]['forumName']."</a></td>"
+                       echo "<tr><td><a class='success' href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID'].">". $this->forums[$j]['forumName']." forum"."</a></td>"
                                         . "<td>ay 7aga</td></tr>";  
                    }   
              }
          echo "</table><br>";    
-  
+         echo "</div></div>";
 }
 ?>
+        </div></div>
 </div>

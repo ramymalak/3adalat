@@ -1,16 +1,57 @@
+<div class="container">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><h1><strong>Users</strong></h1></div>
+        <div class="panel-body">
+<?php
+
+echo "<table class='table table-responsive table-striped'>";
+echo "<tr>".
+        "<th ><h3 style='color:#8A6D3B;'><strong>ID</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Name</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Email</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Gender</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Country</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Photo</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Admin</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Ban</strong></h3></th>".
+        "<th><h3 style='color:#8A6D3B;'><strong>Actions</strong></h3></th>".
+        "<th> </th>".
+        "<th> </th>".
+     "</tr>";
+
+
+    
+for($i=0; $i< count($this->users);$i++){
+    echo '<tr>';   
+    echo '<td>'.$this->users[$i]['userID'].'</td>';
+    echo '<td>'.$this->users[$i]['userName'].'</td>';
+    echo '<td>'.$this->users[$i]['userEmail'].'</td>';
+    echo '<td>'.$this->users[$i]['gender'].'</td>';
+    echo '<td>'.$this->users[$i]['country'].'</td>';
+    echo '<td>'.'<img src="'.$this->users[$i]['photo'].'" width:"50px" height="50px"/>'.'</td>';
+    echo '<td>'.$this->users[$i]['isAdmin'].'</td>';
+    echo '<td>'.$this->users[$i]['isBan'].'</td>';
+   
+    
+
+
+
+
+/*
+for($i = 0; $i<count($this->users); $i++){
+    echo "<tr>";
+foreach ($this->users[$i] as $key=>$value):
+    echo "<td>".$value ."</td>";
+endforeach;
+ 
+ */
+?>
+            <td><a class="btn btn-info" href="<?php echo $this->baseUrl()?>/user/edit/userID/<?php echo $this->users[$i]['userID'];?>" > Edit </a></td>
+            <td><a class="btn btn-danger" href="<?php echo $this->baseUrl()?>/user/delete/userID/<?php echo $this->users[$i]['userID'];?>" > Delete </a></td>
+            <td><a class="btn btn-warning" href="<?php echo $this->baseUrl()?>/user/ban/userID/<?php echo $this->users[$i]['userID'];?>" > <?php if($this->users[$i]['isBan']==0){echo "Ban";}else{echo "unBan";}  ?> </a></td>
 
 <?php
-//var_dump($this->users[0]);
-for($i = 0; $i<count($this->users); $i++){
-foreach ($this->users[$i] as $key=>$value):
-    echo $key." ".$value ."<br />";
-endforeach;
-?>
-<a href="<?php echo $this->baseUrl()?>/user/edit/userID/<?php echo $this->users[$i]['userID'];?>" > Edit </a>
-<a href="<?php echo $this->baseUrl()?>/user/delete/userID/<?php echo $this->users[$i]['userID'];?>" > Delete </a>
-<a href="<?php echo $this->baseUrl()?>/user/ban/userID/<?php echo $this->users[$i]['userID'];?>" > <?php if($this->users[$i]['isBan']==0){echo "Ban";}else{echo "unBan";}  ?> </a>
-<br />
-<?php
-echo str_repeat("*", 80)."<br />";
+//echo str_repeat("*", 80)."<br />";
+echo "</tr>";
 }
 ?>

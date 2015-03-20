@@ -1,4 +1,4 @@
-<html>
+ <html>
     <head>
 
         <meta charset="utf-8">
@@ -20,11 +20,11 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo $this->baseUrl()?>/Forum/home/">Home</a></li>
+                <li><a href="<?php echo $this->baseUrl()?>/Forum/home/">Home</a></li>
                 <li><a href="<?php echo $this->baseUrl()?>/Category/listall/"> Categories </a></li>
                 <li><a href="<?php echo $this->baseUrl()?>/Forum/listall/"> Forums </a></li>
                <li><a href="<?php echo $this->baseUrl()?>/Threads/list/"> Threads </a></li>
-               <li><a href="<?php echo $this->baseUrl()?>/user/logout/"> Logout </a></li>
+               <li><a class="btn btn-danger navbar-right" href="<?php echo $this->baseUrl()?>/user/logout/"> Logout </a></li>
 
             </ul>
             

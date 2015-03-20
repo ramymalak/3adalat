@@ -1,9 +1,11 @@
-<br /><br />
-<div align="center" style='margin: 0 auto;'>
+<div class="container">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><h1><strong>Forums</strong></h1></div>
+        <div class="panel-body">
 <?php
-echo "<a href=".$this->baseUrl()."/Forum/add/>Add Forum</a><br>";
-echo "<table border=1 style='text-align:center;'>";
-echo "<tr><td>Forum Name </td><td>Category Name</td><td>Action</td></tr>";
+echo "<center><a class='btn btn-primary' href=".$this->baseUrl()."/Forum/add/>Add New Forum</a></center><br>";
+echo "<table class='table table-responsive table-striped'>";
+echo "<tr><th>Forum Name </th><th>Category Name</th><th>Actions</th><th></th><th></th></tr>";
 for($i = 0; $i<count($this->forums); $i++){
     echo "<tr><td>". $this->forums[$i]['forumName']."</td>"; 
        for($j = 0; $j<count($this->categories); $j++){ 
@@ -11,16 +13,18 @@ for($i = 0; $i<count($this->forums); $i++){
                echo "<td>".$this->categories[$j]['categoryName']."</td>"; 
            }
        }
-    echo "<td><a href=".$this->baseUrl()."/Forum/edit/forum_id/".$this->forums[$i]['forumID'].">Edit</a>";
-    echo "    <a href=".$this->baseUrl()."/Forum/delete/forum_id/".$this->forums[$i]['forumID'].">Delete</a>";
+    echo "<td><a class='btn btn-info' href=".$this->baseUrl()."/Forum/edit/forum_id/".$this->forums[$i]['forumID'].">Edit</a>";
+    echo "    <a class='btn btn-danger' href=".$this->baseUrl()."/Forum/delete/forum_id/".$this->forums[$i]['forumID'].">Delete</a>";
      if($this->forums[$i]['isLocked']==1){
-            echo "    <a href=".$this->baseUrl()."/Forum/status/id/".$this->forums[$i]['forumID']."/status/0/column/isLocked>Locked</a></td></tr>";
+            echo "    <a class='btn btn-warning' href=".$this->baseUrl()."/Forum/status/id/".$this->forums[$i]['forumID']."/status/0/column/isLocked>Locked</a></td></tr>";
     }  else {
-            echo "    <a href=".$this->baseUrl()."/Forum/status/id/".$this->forums[$i]['forumID']."/status/1/column/isLocked>Unlocked</a></td></tr>";
+            echo "    <a class='btn btn-warning' href=".$this->baseUrl()."/Forum/status/id/".$this->forums[$i]['forumID']."/status/1/column/isLocked>Unlocked</a></td></tr>";
 
     }
     
 }
 echo "</table>";
 ?>
+        </div>
+        </div>
 </div>
