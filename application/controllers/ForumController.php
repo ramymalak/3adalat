@@ -75,6 +75,9 @@ class ForumController extends Zend_Controller_Action
       
       public function homeAction()
         { 
+          $system_model = new Application_Model_System();
+          $system=$system_model->checkSystem();
+          $this->view->system= $system; 
           //send all categories
           $cat_model = new Application_Model_Category();
           $categories=$cat_model->listCategories();
@@ -88,6 +91,11 @@ class ForumController extends Zend_Controller_Action
         
       public function listallAction()
         { 
+          $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+          
           //send all categories
           $cat_model = new Application_Model_Category();
           $categories=$cat_model->listCategories();
@@ -197,7 +205,12 @@ class ForumController extends Zend_Controller_Action
     }
     /////////////////////////////////////////////////
     
-    
+    public function systemstatusAction()
+    {
+       $system_model = new Application_Model_System();
+       $system_model->updateStatus();
+       $this->redirect("Forum/home");
+    }
     
     
 }

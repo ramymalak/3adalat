@@ -1,12 +1,11 @@
 <br /><br />
-<div align="center" style='margin: 0 auto;'>
+<div class="col-sm-offset-4 col-sm-4"  style=" margin-top:20px;">
 <?php
- echo "<a href=".$this->baseUrl()."/Forum/add/>Add Forum</a>";
- echo "<table border=1 style='text-align:center;'>";
-            echo "<tr><td  colspan='2'>".$this->category[0]['categoryName']."</td></tr>";  
+ echo "<table border=1 class='table table-striped'  style='text-align:center;'>";
+            echo "<tr><td  colspan='2'><b><font size='4' color='#600000 '>".$this->category[0]['categoryName']."</font></b></td></tr>";  
 
             for($j = 0; $j<count($this->forums); $j++){
-                    echo "<tr><td><a href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID'].">". $this->forums[$j]['forumName']."</a></td>";
+                    echo "<tr><td><a href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID']."><font size='3'>". $this->forums[$j]['forumName']."</font></a></td>";
                  }   
              
          echo "</table><br>"; 

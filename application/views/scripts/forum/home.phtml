@@ -1,4 +1,20 @@
-<div class="container">
+
+<?php
+
+$userInfo = Zend_Auth::getInstance()->getStorage()->read();
+if ($userInfo->isAdmin==1){
+      if ($this->system[0]['isLocked']==0){
+        echo "<a class='col-sm-offset-10 btn btn-danger btn-xs ' role='button'  href=".$this->baseUrl()."/forum/systemstatus><font size='5'>Lock System</font></a>";   
+          
+    }else{
+        echo "<a class='col-sm-offset-10 btn btn-danger btn-xs ' role='button'  href=".$this->baseUrl()."/forum/systemstatus><font size='5'>Unlock System</font></a>"; 
+    }    
+        
+}
+
+?>
+<br/><br>
+<div class="container  col-sm-10 col-sm-offset-1">
     <div class="panel panel-warning">
         <div class="panel-heading"><h1><strong>New Feeds</strong></h1></div>
         <div class="panel-body">

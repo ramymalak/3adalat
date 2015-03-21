@@ -1,32 +1,34 @@
 <br /><br />
-<div align="center" style='margin: 0 auto;'>
+<div class="col-sm-offset-3 col-sm-5"  style=" margin-top:20px;">
 <?php
 
 $userInfo = Zend_Auth::getInstance()->getStorage()->read();
 
 if ($userInfo->isAdmin==1){//if he was admin allow him to add thread 
-        echo "<a href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID'].">Add Thread</a>";
+        echo "<a class='col-sm-offset-4' href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID']."><font size='5'>Add Thread</font></a>";
 }else{//normal user
         if ($this->forum[0]['isLocked']==0){ //if it was normal user and forum is not Locked
-              echo "<a href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID'].">Add Thread</a>";
+              echo "<a class='col-sm-offset-4' href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID']."><font size='5' >Add Thread</font></a>";
         }
 }   
-echo "<table border=1 style='text-align:center;'>";
-            echo "<tr><td  colspan='2'>".$this->forum[0]['forumName']."</td></tr>";  
+
+
+echo "<table border=1 class='table table-striped' style='text-align:center;'>";
+            echo "<tr><td  colspan='2'><font size='5' color='#680000 '>".$this->forum[0]['forumName']."</font></td></tr>";  
                //sticky threads
             for($j = 0; $j<count($this->threads); $j++){
                 if($this->threads[$j]['isSticky']==1){
-                    echo "<tr><td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$j]['threadID'].">"
-                    . $this->threads[$j]['threadTitle']."</a></td><"
-                         . "td><font color='red'>** Sticky</font></td></tr>";  
+                    echo "<tr><td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$j]['threadID']."><font size='4'>"
+                    . $this->threads[$j]['threadTitle']."</font></a></td><"
+                         . "td><font color='#680000'>** Sticky</font></td></tr>";  
                 }   
               
               } 
               //unstick threads
              for($j = 0; $j<count($this->threads); $j++){
                 if($this->threads[$j]['isSticky']==0){
-                 echo "<tr><td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$j]['threadID'].">"
-                    . $this->threads[$j]['threadTitle']."</a></td><td>ay 7aga</td></tr>";  
+                 echo "<tr><td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$j]['threadID']."><font size='4'>"
+                    . $this->threads[$j]['threadTitle']."</font></a></td><td></td></tr>";  
                 }   
               
               } 

@@ -1,10 +1,13 @@
    
  <br /><br />
-<div align="center" style='margin: 0 auto;'>
+<div class="col-sm-offset-2 col-sm-8"  style=" margin-top:20px;">
 <?php
 
-echo "<table border=1 style='text-align:center;'>";
-echo "<tr><td>Thread Title</td><td>Thread Body</td><td>Forum Name</td><td>Action</td></tr>";
+echo "<table border=1 class='table table-striped' style='text-align:center;'>";
+echo "<tr><td><b><font size='4'>Thread Title</font></td>"
+. "<td><b><font size='4'>Thread Body</font></b></td>"
+        . "<td><b><font size='4'>Forum Name</font></b></td>"
+        . "<td><b><font size='4'>Action</font></b></td></tr>";
 for($i = 0; $i<count($this->threads); $i++){
     
     echo "<tr><td>". $this->threads[$i]['threadTitle']."</td>"; 
@@ -16,21 +19,21 @@ for($i = 0; $i<count($this->threads); $i++){
             }
     }
     
-    echo "<td><a href=".$this->baseUrl()."/Threads/edit/id/".$this->threads[$i]['threadID'].">Edit</a>";
-    echo "    <a href=".$this->baseUrl()."/Threads/delete/id/".$this->threads[$i]['threadID'].">Delete</a>";
+    echo "<td><a class='btn btn-success btn-xs' role='button'  href=".$this->baseUrl()."/Threads/edit/id/".$this->threads[$i]['threadID'].">Edit</a>";
+    echo " &nbsp;   <a  class='btn btn-warning btn-xs' role='button'  href=".$this->baseUrl()."/Threads/delete/id/".$this->threads[$i]['threadID'].">Delete</a>";
     //
     if($this->threads[$i]['isSticky']==1){
-            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isSticky>Sticky</a>";
+            echo " &nbsp;  <a class='btn btn-primary btn-xs' role='button' href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isSticky>Sticky</a>";
     }  else {
-            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isSticky>UnSticky</a>";
+            echo " &nbsp;   <a class='btn btn-info btn-xs' role='button'  href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isSticky>UnSticky</a>";
 
     }
     //
     
      if($this->threads[$i]['isLocked']==1){
-            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isLocked>Locked</a></td></tr>";
+            echo " &nbsp;   <a  class='btn btn-danger btn-xs' role='button' href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isLocked>Locked</a></td></tr>";
     }  else {
-            echo "    <a href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isLocked>Unlocked</a></td></tr>";
+            echo " &nbsp;   <a class='btn btn-default btn-xs' role='button' href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isLocked>Unlocked</a></td></tr>";
 
     }
     

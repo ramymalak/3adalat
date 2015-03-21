@@ -5,9 +5,10 @@ class UserController extends Zend_Controller_Action
 
     public function init()
     {
-        $authorization =Zend_Auth::getInstance(); 
-        if(!$authorization->hasIdentity() && $this->_request->getActionName()!='login') 
-            { $this->redirect("user/login"); }
+        
+//        $authorization =Zend_Auth::getInstance(); 
+//        if(!$authorization->hasIdentity() && $this->_request->getActionName()!='login') 
+//            { $this->redirect("user/login"); }
     }
 
     public function indexAction()
@@ -35,6 +36,9 @@ class UserController extends Zend_Controller_Action
 
     public function listAction()
     {
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity()) 
+            { $this->redirect("user/login"); }
         // action body
         $user_model = new Application_Model_User();
         $this->view->users = $user_model->listUsers();
@@ -42,6 +46,9 @@ class UserController extends Zend_Controller_Action
 
     public function deleteAction()
     {
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity()) 
+            { $this->redirect("user/login"); }
         // action body
         $id = $this->_request->getParam("userID");
         if(!empty($id)){
@@ -55,6 +62,9 @@ class UserController extends Zend_Controller_Action
     
     public function banAction()
     {
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity()) 
+            { $this->redirect("user/login"); }
         // action body
         $id = $this->_request->getParam("userID");
         if(!empty($id)){
@@ -70,6 +80,9 @@ class UserController extends Zend_Controller_Action
 
     public function editAction()
     {
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity()) 
+            { $this->redirect("user/login"); }
         // action body
         $userID = $this->_request->getParam("userID");
         $form  = new Application_Form_Signup();
@@ -128,7 +141,19 @@ class UserController extends Zend_Controller_Action
                if ($result->isValid()) {
                  $autho =Zend_Auth::getInstance();
                  $storage = $autho->getStorage();
-                 $storage->write($auth->getResultRowObject(array('userName' , 'photo' , 'isAdmin','isBan')));
+                 $storage->write($auth->getResultRowObject(array('userName' , 'photo' , 'isAdmin','isBan','userID')));
+                 
+                 $system_model = new Application_Model_System();
+                 $system=$system_model->checkSystem(); 
+                    $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+                    if ($userInfo->isAdmin==0){
+                        if($system[0]['isLocked']==1){
+                            session_destroy();
+                           $this->redirect("user/lock"); 
+                        }
+
+                    }
+                 
                  
                  $this->redirect("forum/home");
                       //exit();
@@ -141,10 +166,18 @@ class UserController extends Zend_Controller_Action
         
     }
     
+     public function lockAction()
+    {
+         
+    }
+    
   ////////////////////////////////////////////////
     
      public function logoutAction()
     {
+         $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity()) 
+            { $this->redirect("user/login"); }
          session_destroy();
          $this->redirect("user/login");
          

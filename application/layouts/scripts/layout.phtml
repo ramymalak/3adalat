@@ -7,14 +7,26 @@ $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>3adalat</title>
-        
     </head>
-    
-    <body style="background-image: url('<?php echo $this->baseUrl(); ?>/img/bg2.jpg');background-repeat: repeat;">
-     <?php
-             
+
+    <?php
+    if (!Zend_Auth::getInstance()->hasIdentity()) {             
         include ( '/var/www/html/3adalat/public/design/header.php');
         echo $this->layout()->content;        
-       ?> 
-    </body>
-    </html>    
+        ?>
+    </html>
+<?php } else {
+    $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+    if ($userInfo->isAdmin == 0) {
+            include ( '/var/www/html/3adalat/public/design/userheader.php');
+           
+        } elseif ($userInfo->isAdmin==1) {
+            include ( '/var/www/html/3adalat/public/design/adminheader.php');
+            
+        }
+        echo $this->layout()->content;
+
+    ?>
+
+<?php }
+?>

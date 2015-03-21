@@ -28,7 +28,7 @@ class Application_Form_Forum extends Zend_Form
         $reset = new Zend_Form_Element_Reset("Cancel");
         $reset->setAttrib("class", "btn btn-danger");
         $reset->setAttrib("id", "cancelbtn");
-        $this->addElements(array($forumName,$category,$forumID,$category_id,$submit,$reset));
+        $this->addElements(array($forumName,$category,$submit,$reset,$forumID,$category_id));
     }
 
 

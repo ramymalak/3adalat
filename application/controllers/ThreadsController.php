@@ -19,12 +19,12 @@ class ThreadsController extends Zend_Controller_Action
     {
        $forum_id= $this->_request->getParam("forum_id");
        $form  = new Application_Form_Thread();
-       
+       $userInfo = Zend_Auth::getInstance()->getStorage()->read();
        if($this->_request->isPost()){
            if($form->isValid($this->_request->getParams())){
                $thread_info = $form->getValues();
                $thread_model = new Application_Model_Thread();
-               $thread_model->addTread($thread_info,$forum_id);
+               $thread_model->addTread($thread_info,$forum_id,$userInfo->userID);
                $this->redirect("/Forum/listoneforum/forum_id/".$forum_id);
                        
            }

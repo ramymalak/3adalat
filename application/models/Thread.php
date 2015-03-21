@@ -4,12 +4,12 @@ class Application_Model_Thread extends Zend_Db_Table_Abstract
 {
     protected $_name = "threads";
     
-    function addTread($data,$id){
+    function addTread($data,$id,$user_id){
         $row = $this->createRow();
         $row->threadTitle = $data['threadTitle'];
         $row->threadBody = $data['threadBody'];
         $row->forumID = $id ;
-        $row->userID = 1 ;
+        $row->userID = $user_id ;
         return $row->save();
     }
     function listTread(){
