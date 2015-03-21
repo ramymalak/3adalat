@@ -75,6 +75,21 @@ class UserController extends Zend_Controller_Action
         $this->redirect("user/list");
     }
     
+    public function adminAction()
+    {
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity()) 
+            { $this->redirect("user/login"); }
+        // action body
+        $id = $this->_request->getParam("userID");
+        if(!empty($id)){
+            $user_model = new Application_Model_User();
+            $user_model->invadminUser($id);
+            
+        }
+        $this->redirect("user/list");
+    }
+    
     
     
 

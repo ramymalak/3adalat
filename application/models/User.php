@@ -112,7 +112,16 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         return $this->update($data, "userID=".$userID);
     }
 
-    
+    function invadminUser($userID){
+        
+        $theusr=$this->find($userID)->toArray();
+        if($theusr[0]['isAdmin']){
+            $data['isAdmin']=false;
+        }else{
+           $data['isAdmin']=true; 
+        }
+        return $this->update($data, "userID=".$userID);
+    }
     
     
     

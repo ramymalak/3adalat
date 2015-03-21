@@ -17,6 +17,7 @@ echo "<tr>".
         "<th><h3 style='color:#8A6D3B;'><strong>Actions</strong></h3></th>".
         "<th> </th>".
         "<th> </th>".
+        "<th> </th>".
      "</tr>";
 
 
@@ -49,7 +50,7 @@ endforeach;
             <td><a class="btn btn-info" href="<?php echo $this->baseUrl()?>/user/edit/userID/<?php echo $this->users[$i]['userID'];?>" > Edit </a></td>
             <td><a class="btn btn-danger" href="<?php echo $this->baseUrl()?>/user/delete/userID/<?php echo $this->users[$i]['userID'];?>" > Delete </a></td>
             <td><a class="btn btn-warning" href="<?php echo $this->baseUrl()?>/user/ban/userID/<?php echo $this->users[$i]['userID'];?>" > <?php if($this->users[$i]['isBan']==0){echo "Ban";}else{echo "unBan";}  ?> </a></td>
-
+            <td><a class="btn btn-warning" href="<?php echo $this->baseUrl()?>/user/admin/userID/<?php echo $this->users[$i]['userID'];?>" > <?php if($this->users[$i]['isAdmin']==0){echo "Regular";}else{echo "Admin";}  ?> </a></td>
 <?php
 //echo str_repeat("*", 80)."<br />";
 echo "</tr>";
