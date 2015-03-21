@@ -43,6 +43,16 @@ class UserController extends Zend_Controller_Action
         $user_model = new Application_Model_User();
         $this->view->users = $user_model->listUsers();
     }
+    
+     public function listthisuserAction()
+    {
+        // action body
+         $id = $this->_request->getParam("userID");
+         if(!empty($id)){
+             $user_model = new Application_Model_User();
+             $this->view->user=$user_model->listOneUser(23);
+         }
+    }
 
     public function deleteAction()
     {
@@ -58,8 +68,7 @@ class UserController extends Zend_Controller_Action
         }
         $this->redirect("user/list");
     }
-    
-    
+
     public function banAction()
     {
         $authorization =Zend_Auth::getInstance(); 
@@ -74,7 +83,7 @@ class UserController extends Zend_Controller_Action
         }
         $this->redirect("user/list");
     }
-    
+
     public function adminAction()
     {
         $authorization =Zend_Auth::getInstance(); 
@@ -89,9 +98,6 @@ class UserController extends Zend_Controller_Action
         }
         $this->redirect("user/list");
     }
-    
-    
-    
 
     public function editAction()
     {
@@ -129,7 +135,7 @@ class UserController extends Zend_Controller_Action
         $this->view->form = $form;
 	$this->render('add');
     }
-    ///////////////////////////////////////
+
     public function loginAction()
     {
         // disable master layout
@@ -180,15 +186,13 @@ class UserController extends Zend_Controller_Action
        }
         
     }
-    
-     public function lockAction()
+
+    public function lockAction()
     {
          
     }
-    
-  ////////////////////////////////////////////////
-    
-     public function logoutAction()
+
+    public function logoutAction()
     {
          $authorization =Zend_Auth::getInstance(); 
         if(!$authorization->hasIdentity()) 
@@ -197,11 +201,13 @@ class UserController extends Zend_Controller_Action
          $this->redirect("user/login");
          
     }
-    
-    
 
-//////////////////////////////////////////////
+   
+
+
 }
+
+
 
 
 
