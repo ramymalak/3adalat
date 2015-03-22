@@ -13,12 +13,31 @@ echo "<br><br>";
 echo "<font color='red'>Comment : </font><br>";
 
 if ($userInfo->isAdmin==1){//if he was admin
-            echo $this->form;    
 
+?>
+
+
+ <br/>
+<textarea rows="5" cols="50" id="reply"></textarea><br/>
+<input type="button" value="add comment" onclick="addcomment()"></input>
+<input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
+<input type="text" id="user" value=<?php echo $thread['userID'] ?> hidden>  </input>
+<br/><br/>
+
+
+<?php
 }  else {//normal user
     if ($this->thread[0]['isLocked']==0){ //if it was normal user and thread is not Locked
         
-            echo $this->form;
+   ?>
+        <br/>
+       <textarea rows="5" cols="50" id="reply"></textarea><br/>
+       <input type="button" value="add comment" onclick="addcomment()"></input>
+       <input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
+       <input type="text" id="user" value=<?php echo $thread['userID'] ?> hidden>  </input>
+       <br/><br/>
+
+<?php
         
     }
     
@@ -38,20 +57,7 @@ if ($userInfo->isAdmin==1){//if he was admin
                     echo "<br/>*************************************************";
                     echo "</div>";
                     echo "</div>";
-                    if ($userInfo->isAdmin==1){
-                            echo "<a href=".$this->baseUrl()."/threads/editreply/reply_id/".$this->reply[$i]['replayID']."/thread_id/".$thread['threadID'].">Edit</a>";
-                            echo "    <a href=".$this->baseUrl()."/Replay/delete/reply_id/".$this->reply[$i]['replayID']."/thread_id/".$thread['threadID'].">Delete</a>";
-                        
-                    }  else {
-                            if ($userInfo->userID==$this->reply[$i]['userID']){
-                                echo "<a href=".$this->baseUrl()."/threads/editreply/reply_id/".$this->reply[$i]['replayID']."/thread_id/".$thread['threadID'].">Edit</a>";
-                                  echo "    <a href=".$this->baseUrl()."/Replay/delete/reply_id/".$this->reply[$i]['replayID']."/thread_id/".$thread['threadID'].">Delete</a>";
-                             }
-
-                    } 
-                    
-             echo "<br><br>*************************************************";
-     
+            
         }
 
 ?>

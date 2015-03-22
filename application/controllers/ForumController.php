@@ -99,8 +99,8 @@ class ForumController extends Zend_Controller_Action
             $thread=$thread_model->selectNewestThread($forums[$i]['forumID']);
              //if ( $thread->Newest!=NULL){
                 $threads[] =$thread;
-                var_dump($thread);
-                echo "<br><br>********************************************";
+                //var_dump($thread);
+                //echo "<br><br>********************************************";
              //}
             
           
