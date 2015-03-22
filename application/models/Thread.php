@@ -53,13 +53,27 @@ class Application_Model_Thread extends Zend_Db_Table_Abstract
         $select = $this->select()
             ->from(array('t' => 'threads'),array(' forumID,threadTitle,threadID,MAX(trreadDate) as Newest' ));
         $select->where('forumID='.$forumid);
-      
-       
-        $row = $this->fetchAll($select);
-//        $tData = $row->toArray();
-        return $row;
+        $row = $this->fetchRow($select);
+        $value=Null;
+        if($row->Newest!=NULl){
+          $myrow=$this->NewestThread($forumid,$row->Newest);
+          $value=$myrow;
+        }
+        
+        return $value;
         
     }  
       
     ////////////////////////////////////////
+    function NewestThread($forumid,$date){
+        $select = $this->select();
+            
+        $select->where('forumID='.$forumid )
+                ->where('trreadDate="'.$date.'"' );
+        $row = $this->fetchRow($select);
+        return $row;
+        
+    }
+    //////////////////////////////////////////
+    
 }

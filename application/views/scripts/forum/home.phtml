@@ -27,13 +27,13 @@ for($i = 0; $i<count($this->categories); $i++){
             for($j = 0; $j<count($this->forums); $j++){
                  if($this->forums[$j]['categoryID']==$this->categories[$i]['categoryID']){
                        echo "<tr><td><a class='success' href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID'].">". $this->forums[$j]['forumName']." forum"."</a></td>";  
-//                            for($k=0; $k<count($this->threads); $k++)
-//                            {
-//                                if ($this->forums[$j]['forumID']==$this->threads[$k]->forumID)
-//                                {
-//                                    echo "<td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$k]->threadID.">".$this->threads[$k]->threadTitle."</a>&nbsp; &nbsp;".$this->threads[$k]->Newest." </td>" ;
-//                                }
-//                            }
+                            for($k=0; $k<count($this->threads); $k++)
+                            {
+                                if ($this->forums[$j]['forumID']==$this->threads[$k]->forumID)
+                                {
+                                    echo "<td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$k]->threadID.">".$this->threads[$k]->threadTitle."</a>&nbsp; &nbsp;".$this->threads[$k]->trreadDate." </td>" ;
+                                }
+                            }
                    echo "<tr>";  
                  }   
              }

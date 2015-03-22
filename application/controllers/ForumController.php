@@ -97,15 +97,12 @@ class ForumController extends Zend_Controller_Action
           $thread_model = new Application_Model_Thread();
           for($i = 0; $i<count($forums); $i++){
             $thread=$thread_model->selectNewestThread($forums[$i]['forumID']);
-             //if ( $thread->Newest!=NULL){
+            if ( $thread!=NULL){
                 $threads[] =$thread;
-                var_dump($thread);
-                echo "<br><br>********************************************";
-             //}
+            }
             
           
           }
-          //exit();
          $this->view->threads = $threads;          
      
           

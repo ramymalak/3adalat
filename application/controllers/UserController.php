@@ -182,6 +182,10 @@ class UserController extends Zend_Controller_Action
                             session_destroy();
                            $this->redirect("user/lock"); 
                         }
+                          if($userInfo->isBan==1){
+                            session_destroy();
+                           $this->redirect("user/banuser"); 
+                        }
 
                     }
                  
@@ -198,6 +202,11 @@ class UserController extends Zend_Controller_Action
     }
 
     public function lockAction()
+    {
+         
+    }
+
+      public function banuserAction()
     {
          
     }
