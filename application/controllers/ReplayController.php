@@ -25,6 +25,7 @@ class ReplayController extends Zend_Controller_Action
         
          
          $reply= $this->_request->getParam("q");
+         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
         if($reply){
             $thread_id= $this->_request->getParam("thread_id");
             $reply_model = new Application_Model_Replay();
@@ -61,5 +62,22 @@ class ReplayController extends Zend_Controller_Action
     }
 
 ///////////////////////////////////////////////////////////////////
+    
+   public function deleteAction()
+    {
+        $thread_id = $this->_request->getParam("thread_id");
+        $reply_id = $this->_request->getParam("reply_id");
+        if(!empty($reply_id)){
+            $reply_model = new Application_Model_Replay();
+            $reply_model->deleteReply($reply_id);
+        }
+        $this->redirect("/Threads/listonethread/thread_id/".$thread_id);
+      
+    }
+    
+
+    
+    
+ //////////////////////////////////////////////////////////////////   
 }
 

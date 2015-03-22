@@ -36,6 +36,12 @@ class ThreadsController extends Zend_Controller_Action
   ///////////////////////////////////////////////////////////////////  
     public function listAction()
     {
+         //allow this page only for admin
+         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }  
+        
           //send all categories
           $cat_model = new Application_Model_Category();
           $categories=$cat_model->listCategories();
@@ -127,5 +133,4 @@ class ThreadsController extends Zend_Controller_Action
         } 
     
     
-    /////////////////////////////////////////////////
 }

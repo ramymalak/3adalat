@@ -1,14 +1,18 @@
 <br /><br />
-<div class="col-sm-offset-4 col-sm-4"  style=" margin-top:20px;">
+<div class="container col-sm-offset-3 col-sm-5">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><h1><strong><?php echo $this->category[0]['categoryName']; ?></strong></h1></div>
+        <div class="panel-body">
 <?php
- echo "<table border=1 class='table table-striped'  style='text-align:center;'>";
-            echo "<tr><td  colspan='2'><b><font size='4' color='#600000 '>".$this->category[0]['categoryName']."</font></b></td></tr>";  
+ echo "<table  class='table table-striped'  style='text-align:center;'>";
 
             for($j = 0; $j<count($this->forums); $j++){
                     echo "<tr><td><a href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID']."><font size='3'>". $this->forums[$j]['forumName']."</font></a></td>";
                  }   
              
-         echo "</table><br>"; 
+         echo "</tr></table><br>"; 
 
 ?>
 </div>
+    </div>
+      </div>

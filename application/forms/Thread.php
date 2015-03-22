@@ -23,6 +23,7 @@ class Application_Form_Thread extends Zend_Form
          
          
          $submit = new Zend_Form_Element_Submit("submit");
+         $submit->setAttrib("class", "col-sm-offset-4 btn btn-success");
          $this->addElements(array($threadTitle,$threadBody,$submit));
     }
 

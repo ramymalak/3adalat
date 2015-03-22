@@ -7,7 +7,7 @@ echo "<center><a class='btn btn-primary' href=".$this->baseUrl()."/Category/add/
 echo "<table class='table table-responsive table-striped'>";
 echo "<tr><th>Category Name </th><th>Actions</th></tr>";
 for($i = 0; $i<count($this->categories); $i++){
-    echo "<tr><td>". $this->categories[$i]['categoryName']."</td>";  
+    echo "<tr><td><a href='".$this->baseUrl()."/Category/listonecategory/cat_id/".$this->categories[$i]['categoryID']."'>". $this->categories[$i]['categoryName']."</a></td>";  
     echo "<td><a class='btn btn-info' href=".$this->baseUrl()."/Category/edit/cat_id/".$this->categories[$i]['categoryID'].">Edit</a> &nbsp;";
     echo "<a class='btn btn-danger' href=".$this->baseUrl()."/Category/delete/cat_id/".$this->categories[$i]['categoryID'].">Delete</a></td></tr>";
 }
