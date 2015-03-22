@@ -100,8 +100,6 @@ class ForumController extends Zend_Controller_Action
             if ( $thread!=NULL){
                 $threads[] =$thread;
             }
-            
-          
           }
          $this->view->threads = $threads;          
      

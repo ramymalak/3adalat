@@ -17,33 +17,14 @@ class Application_Model_Replay extends Zend_Db_Table_Abstract
         return $this->fetchAll('threadID='.$id)->toArray();
     }
     
-    //delete replay
-     function deleteReply($id){
-        return $this->delete("replayID=$id");
+    function deleteReply($id){
+         return $this->delete("replayID=$id");
     }
+function editReply($id,$val){
+    $this->update(['replayBody'=>$val], "replayID=".$id);
+    return $this->fetchAll()->toArray();
     
-    //get reply by id
-      function getReplyById($id){
-        return $this->find($id)->toArray();
-    }
-    
-    function editReply($data){
-       
-//       if(!empty($data['replayID']))
-//            $data['replayID']=$data['replayID'];
-//        else
-//            unset ($data['replayID']); 
-//        
-//        if(!empty($data['repalyBody']))
-//            $data['repalyBody']=$data['repalyBody'];
-//        else
-//            unset ($data['repalyBody']); 
-//        
-        var_dump($data);
-                exit();
-         $this->update($data,"replayID=".$data['replayID']);
-        return $this->fetchAll()->toArray();
-    }
+}
 
 }
 
