@@ -16,7 +16,15 @@ class Application_Model_Replay extends Zend_Db_Table_Abstract
    function listRepliesByThreadId($id){
         return $this->fetchAll('threadID='.$id)->toArray();
     }
-
+    
+    function deleteReply($id){
+         return $this->delete("replayID=$id");
+    }
+function editReply($id,$val){
+    $this->update(['replayBody'=>$val], "replayID=".$id);
+    return $this->fetchAll()->toArray();
+    
+}
 
 }
 

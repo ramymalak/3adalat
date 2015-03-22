@@ -42,13 +42,20 @@ if ($userInfo->isAdmin==1){//if he was admin
     }
     
 }
+//href=".$this->baseUrl()."/replay/delete/id/".$this->reply[$i]['replayID']
 
         for($i=0;$i<count($this->reply);$i++){
 
+                    echo "<div id=".$this->reply[$i]['replayID']."co".">";
+                    echo "<div>"."user num: ".$this->reply[$i]['userID']."</div>";                   
+                    echo "<div id=".$this->reply[$i]['replayID']."rebo".">".$this->reply[$i]['replayBody']."</div>"; 
                     echo "<div>";
-                    echo "user num: ".$this->reply[$i]['userID']."<br/>";                   
-                    echo $this->reply[$i]['replayBody']."<br/>"; 
-                    echo "*************************************************";
+                    echo "<input type='button' class='btn btn-success btn-xs' role='button' value='Edit'"."id=".'"'.$this->reply[$i]['replayID'].'e'.'"'." onclick=editrp(".$this->reply[$i]['replayID'].")"."></input>";
+                    
+                    echo "&nbsp; <input type='button' class='btn btn-warning btn-xs' role='button' value='Delete'"."id=".'"'.$this->reply[$i]['replayID'].'d'.'"'." onclick=delrp(".$this->reply[$i]['replayID'].")"."></input>";
+                    
+                    echo "<br/>*************************************************";
+                    echo "</div>";
                     echo "</div>";
             
         }
@@ -56,13 +63,97 @@ if ($userInfo->isAdmin==1){//if he was admin
 ?>
 <body>
 <script>
+    
+ function editrp(val){
+     document.getElementById(val+"e").setAttribute("disabled","true");
+     thecom=document.getElementById(val+"rebo");
+     newtextarea=document.createElement("textarea");
+     newtextarea.setAttribute("id",val+"area");
+     newtextarea.innerHTML=thecom.innerHTML;
+     btn=document.createElement("input");
+     btn.setAttribute("type","button");
+     btn.setAttribute("value","ok");
+     btn.setAttribute("id",val+"btn");
+     btn.setAttribute("onclick","aftrok("+val+")");
+     thecom.appendChild(newtextarea);
+     thecom.appendChild(btn);
+ }
+ 
+ function aftrok(val){
+     
+     if(window.XMLHttpRequest){
+
+            ajaxRequest = new XMLHttpRequest();
+
+    }else{
+
+	ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    query=val;
+    edtcomt=document.getElementById(val+"area").value;
+    ajaxRequest.open("GET","../../../replay/edit/id/"+query+"/newval/"+edtcomt,true);
+    ajaxRequest.send();
+    
+    
+
+
+        ajaxRequest.onreadystatechange=function(){
+               if(ajaxRequest.readyState==4 && ajaxRequest.status==200){
+                   
+                  document.getElementById(val+"rebo").innerHTML=edtcomt; 
+                  document.getElementById(val+"e").removeAttribute("disabled");
+               }}
+     
+     
+     
+ }
+ function delrp(val){
+     
+     if(window.XMLHttpRequest){
+
+            ajaxRequest = new XMLHttpRequest();
+
+    }else{
+
+	ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    query=val;
+    ajaxRequest.open("GET","../../../replay/delete/id/"+query,true);
+    ajaxRequest.send();
+    
+    
+
+
+        ajaxRequest.onreadystatechange=function(){
+               if(ajaxRequest.readyState==4 && ajaxRequest.status==200){
+                   
+                  document.getElementById(val+"co").remove(); 
+               }}
+     
+     
+     
+     
+ }
+    
+    
+    
 function addcomment(){
     
     
   var newcomm=document.getElementById("reply");  
   var addnew=document.createElement("div");
-    addnew.innerHTML="user num: "+document.getElementById("user").value+"<br/>"+newcomm.value+"<br/>"+"*************************************************"+"<br/>";
+  var userdata=document.createElement("div");
+  var replaydata=document.createElement("div");
+  
+  var controls=document.createElement("div");
+    userdata.innerHTML="user num: "+document.getElementById("user").value;
+    replaydata.innerHTML=newcomm.value;
     document.body.appendChild(addnew);
+    addnew.appendChild(userdata);
+    addnew.appendChild(replaydata);
+    addnew.appendChild(controls);
     if(window.XMLHttpRequest){
 
             ajaxRequest = new XMLHttpRequest();
@@ -75,13 +166,41 @@ function addcomment(){
     query=newcomm.value;
     ajaxRequest.open("GET","../../../replay/add/q/"+query+"/thread_id/"+document.getElementById("thread_id").value,true);
     ajaxRequest.send();
-
+    
+    
 
 
         ajaxRequest.onreadystatechange=function(){
                if(ajaxRequest.readyState==4 && ajaxRequest.status==200){
-                       console.log("succes");  
-
+                       //console.log("succes");  
+                       res=ajaxRequest.responseText;
+                       res=res.split("</nav>\n")[1];
+                       res=Number(res);
+                       console.log(res);
+                       
+                       addnew.setAttribute("id",res+"co");
+                       replaydata.setAttribute("id",res+"rebo");
+                       edtbtn=document.createElement("input");
+                       edtbtn.setAttribute("type","button");
+                       edtbtn.setAttribute("id",res+'e');
+                       edtbtn.setAttribute("class",'btn btn-success btn-xs');
+                       edtbtn.setAttribute('role','button');
+                       edtbtn.setAttribute('value','Edit');
+                       edtbtn.setAttribute('onclick',"editrp("+res+")");
+                       controls.appendChild(edtbtn);
+                       controls.innerHTML+="&nbsp ";
+                       
+                       delbtn=document.createElement("input");
+                       delbtn.setAttribute("type","button");
+                       delbtn.setAttribute("id",res+'d');
+                       delbtn.setAttribute("class",'btn btn-warning btn-xs');
+                       delbtn.setAttribute('role','button');
+                       delbtn.setAttribute('value','Delete');
+                       delbtn.setAttribute('onclick',"delrp("+res+")");
+                       
+                       controls.appendChild(delbtn);
+                       controls.innerHTML+="<br/>"+"*************************************************"+"<br/>";
+                       
                 }
         }
  

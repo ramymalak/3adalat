@@ -47,11 +47,11 @@ class UserController extends Zend_Controller_Action
      public function listthisuserAction()
     {
         // action body
-         $id = $this->_request->getParam("userID");
-         if(!empty($id)){
+         //$id = $this->_request->getParam("userID");
+         //if(!empty($id)){
              $user_model = new Application_Model_User();
              $this->view->user=$user_model->listOneUser(23);
-         }
+        // }
     }
 
     public function deleteAction()
