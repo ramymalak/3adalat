@@ -25,14 +25,14 @@ class ReplayController extends Zend_Controller_Action
         
          
          $reply= $this->_request->getParam("q");
-         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
         if($reply){
             $thread_id= $this->_request->getParam("thread_id");
             $reply_model = new Application_Model_Replay();
-            $reply_info=["replayBody"=>$reply,"threadID"=>$thread_id,"userID"=>$userInfo->userID];
+            $reply_info=["replayBody"=>$reply,"threadID"=>$thread_id,"userID"=>1];
+            //echo "okay";
             $mod=$reply_model->addReply($reply_info);
-            //var_dump($mod);
-            echo $mod;
+          //var_dump($mod);
+           echo $mod;
             //$this->view->thedata="hamdaa";
             
             
@@ -62,12 +62,4 @@ class ReplayController extends Zend_Controller_Action
     }
 
 ///////////////////////////////////////////////////////////////////
-    
-   
-    
-
-    
-    
- //////////////////////////////////////////////////////////////////   
 }
-
