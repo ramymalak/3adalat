@@ -24,7 +24,7 @@ $userInfo = Zend_Auth::getInstance()->getStorage()->read();
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo $this->baseUrl()?>/Forum/home/">Home</a></li>
+                <li><a href="<?php echo $this->baseUrl()?>/Forum/home/">Home</a></li>
                 <li><a href=""> Profile </a></li>   
                 <li><a href="<?php echo $this->baseUrl()?>/chat/index"> Chat </a></li>
             </ul>

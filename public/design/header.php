@@ -20,7 +20,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo $this->baseUrl()?>/user/login/">Sign in</a></li>
+                <li><a href="<?php echo $this->baseUrl()?>/user/login/">Sign in</a></li>
                 <li><a href="<?php echo $this->baseUrl()?>/user/add/"> Sign up </a></li>
             </ul>
             

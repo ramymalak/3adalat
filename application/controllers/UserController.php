@@ -44,14 +44,24 @@ class UserController extends Zend_Controller_Action
         $this->view->users = $user_model->listUsers();
     }
     
-     public function listthisuserAction()
+     public function profileAction()
     {
-        // action body
-         $id = $this->_request->getParam("userID");
-         if(!empty($id)){
-             $user_model = new Application_Model_User();
-             $this->view->user=$user_model->listOneUser(23);
-         }
+         // action body(
+         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+         
+         function objectToArray($d){
+                if (is_object($d)){
+                    $d = get_object_vars($d);
+                    return $d;
+                }       
+            }
+         
+         $userInfoArray = objectToArray($userInfo);   
+         $userId = $userInfoArray['userID'];
+  
+         $user_model = new Application_Model_User();
+         $this->view->user=$user_model->listOneUser($userId);
+         
     }
 
     public function deleteAction()
