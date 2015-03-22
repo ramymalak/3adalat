@@ -4,12 +4,14 @@
         <div class="panel-body">
            <?php
            //var_dump($this->user);
-           echo "<div class='col-md-3'><img class='img img-thumbnail' src='".$this->user[0]['photo']."'> <br /></div>";
-           echo "<div class='col-md-6'> <div class='panel panel-success'> <div class='panel-body'>";
-           echo "User Name: "."<p>".$this->user[0]['userName'] ."</p>";
-           echo "Email Address: "."<p>".$this->user[0]['userEmail'] ."</p>";
-           echo "Gender: "."<p>".$this->user[0]['gender'] ."</p>";
-           echo "Country: "."<p>".$this->user[0]['country'] ."</p>";
+           echo "<div class='col-md-2'><img class='img img-circle' src='".$this->user[0]['photo']."'> <br /></div>";
+           echo "<div class='col-md-8'> <div class='panel panel-warning'> <div class='panel-body'>";
+           echo "<table>";
+           echo "<tr>"."<td><strong style='color:#8A6D3B;'>User Name: </strong></td><td>&nbsp;".$this->user[0]['userName'] ."</td></tr>";
+           echo "<tr>"."<td><strong style='color:#8A6D3B;'>Email Address:</strong></td><td>&nbsp;".$this->user[0]['userEmail'] ."</td></tr>";
+           echo "<tr>"."<td><strong style='color:#8A6D3B;'>Gender:</strong></td><td>&nbsp;".$this->user[0]['gender'] ."</td></tr>";
+           echo "<tr>"."<td><strong style='color:#8A6D3B;'>Country:</strong></td><td>&nbsp;".$this->user[0]['country'] ."</td></tr>";
+           echo "</table>";
            echo "</div></div></div>";
            //echo "<img src='".$this->user[0]['photo']."'>";
            
