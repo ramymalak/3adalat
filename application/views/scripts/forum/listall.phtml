@@ -7,10 +7,10 @@ echo "<center><a class='btn btn-primary' href=".$this->baseUrl()."/Forum/add/>Ad
 echo "<table class='table table-responsive table-striped'>";
 echo "<tr><th>Forum Name </th><th>Category Name</th><th>Actions</th><th></th><th></th></tr>";
 for($i = 0; $i<count($this->forums); $i++){
-    echo "<tr><td>". $this->forums[$i]['forumName']."</td>"; 
+    echo "<tr><td><a class='success' href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$i]['forumID'].">". $this->forums[$i]['forumName']." forum"."</a></td>"; 
        for($j = 0; $j<count($this->categories); $j++){ 
            if($this->forums[$i]['categoryID']==$this->categories[$j]['categoryID']){
-               echo "<td>".$this->categories[$j]['categoryName']."</td>"; 
+                   echo "<td><a href='".$this->baseUrl()."/Category/listonecategory/cat_id/".$this->categories[$j]['categoryID']."'>". $this->categories[$j]['categoryName']."</a></td>";
            }
        }
     echo "<td><a class='btn btn-info' href=".$this->baseUrl()."/Forum/edit/forum_id/".$this->forums[$i]['forumID'].">Edit</a>";

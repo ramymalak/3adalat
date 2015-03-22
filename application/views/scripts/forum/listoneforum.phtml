@@ -1,20 +1,23 @@
 <br /><br />
-<div class="col-sm-offset-3 col-sm-5"  style=" margin-top:20px;">
+<div class="container col-sm-offset-3 col-sm-5">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><h1><strong><?php echo $this->forum[0]['forumName']; ?></strong></h1></div>
+        <div class="panel-body">
 <?php
 
 $userInfo = Zend_Auth::getInstance()->getStorage()->read();
 
 if ($userInfo->isAdmin==1){//if he was admin allow him to add thread 
-        echo "<a class='col-sm-offset-4' href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID']."><font size='5'>Add Thread</font></a>";
+        echo "<a class='col-sm-offset-4 btn-xs btn btn-warning' href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID']."><font size='5'>Add Thread</font></a>";
 }else{//normal user
         if ($this->forum[0]['isLocked']==0){ //if it was normal user and forum is not Locked
-              echo "<a class='col-sm-offset-4' href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID']."><font size='5' >Add Thread</font></a>";
+              echo "<a class='col-sm-offset-4 btn-xs btn btn-warning' href=".$this->baseUrl()."/Threads/add/forum_id/".$this->forum[0]['forumID']."><font size='5' >Add Thread</font></a>";
         }
 }   
 
+echo "<br><br>";
 
-echo "<table border=1 class='table table-striped' style='text-align:center;'>";
-            echo "<tr><td  colspan='2'><font size='5' color='#680000 '>".$this->forum[0]['forumName']."</font></td></tr>";  
+echo "<table  class='table table-striped' style='text-align:center;'>";
                //sticky threads
             for($j = 0; $j<count($this->threads); $j++){
                 if($this->threads[$j]['isSticky']==1){
@@ -34,3 +37,5 @@ echo "<table border=1 class='table table-striped' style='text-align:center;'>";
               } 
 ?>
 </div>
+    </div>
+      </div>

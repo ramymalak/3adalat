@@ -17,6 +17,12 @@ class CategoryController extends Zend_Controller_Action
     ///////////////////////////////////////////////////////
     public function addAction()
       {
+        
+        //allow this page only for admin
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
             $form  = new Application_Form_Category();
             if($this->_request->isPost()){
                 if($form->isValid($this->_request->getParams())){
@@ -69,7 +75,13 @@ class CategoryController extends Zend_Controller_Action
     }
     ////////////////////////////////////////////
     public function listallAction()
-    {  //send all categories
+    {     //allow this page only for admin
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+
+          //send all categories
           $cat_model = new Application_Model_Category();
           $categories=$cat_model->listCategories();
           $this->view->categories = $categories;
@@ -77,6 +89,12 @@ class CategoryController extends Zend_Controller_Action
     ////////////////////////////////////////////
     public function deleteAction()
     {
+        //allow this page only for admin
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+        
         $cat_id = $this->_request->getParam("cat_id");
 
         if(!empty($cat_id)){
@@ -93,6 +111,13 @@ class CategoryController extends Zend_Controller_Action
     
     public function editAction()
     {
+        //allow this page only for admin
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+        
+        
         $cat_id= $this->_request->getParam("cat_id");
         $form  = new Application_Form_Category();
         $form->getElement("categoryName")->setRequired(false);

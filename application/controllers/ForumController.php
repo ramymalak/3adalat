@@ -18,6 +18,12 @@ class ForumController extends Zend_Controller_Action
 //amany    
      public function addAction()
       {
+         //allow this page only for admin
+         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+         
         //get all categories  
         $allCategories=array(); 
         $cat_model = new Application_Model_Category();
@@ -85,12 +91,31 @@ class ForumController extends Zend_Controller_Action
           //send all forums
           $forum_model = new Application_Model_Forum();
           $forums=$forum_model->listForums();
-          $this->view->forums = $forums; 
+          $this->view->forums = $forums;
+          
+         
+          $thread_model = new Application_Model_Thread();
+          for($i = 0; $i<count($forums); $i++){
+            $thread=$thread_model->selectNewestThread($forums[$i]['forumID']);
+             //if ( $thread->Newest!=NULL){
+                $threads[] =$thread;
+                var_dump($thread);
+                echo "<br><br>********************************************";
+             //}
+            
+          
+          }
+          //exit();
+         $this->view->threads = $threads;          
+     
+          
+           
             
         }
         
       public function listallAction()
         { 
+          //allow this page only for admin
           $userInfo = Zend_Auth::getInstance()->getStorage()->read();
           if(!$userInfo->isAdmin){
               $this->redirect("forum/home");
@@ -108,6 +133,13 @@ class ForumController extends Zend_Controller_Action
         
      public function deleteAction()
         {
+         //allow this page only for admin
+         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+         
+         
             $forum_id = $this->_request->getParam("forum_id");
 
             if(!empty($forum_id)){
@@ -120,6 +152,12 @@ class ForumController extends Zend_Controller_Action
         
       public function editAction()
     {
+        //allow this page only for admin  
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }  
+          
         $forum_id= $this->_request->getParam("forum_id");
         $form  = new Application_Form_Forum();
         $form->getElement("forumName")->setRequired(false);
@@ -190,6 +228,12 @@ class ForumController extends Zend_Controller_Action
     /////////////////////////////////////////////////
     public function statusAction()
     {
+        //allow this page only for admin
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+        
         $id = $this->_request->getParam("id");
         $column = $this->_request->getParam("column");
         $status=$this->_request->getParam("status");
@@ -207,6 +251,11 @@ class ForumController extends Zend_Controller_Action
     
     public function systemstatusAction()
     {
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          if(!$userInfo->isAdmin){
+              $this->redirect("forum/home");
+          }
+        
        $system_model = new Application_Model_System();
        $system_model->updateStatus();
        $this->redirect("Forum/home");
