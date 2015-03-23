@@ -124,6 +124,10 @@ class ThreadsController extends Zend_Controller_Action
             $thread_model = new Application_Model_Thread();
             $thread=$thread_model->getTreadById($thread_id);
             $this->view->thread = $thread;
+            
+            
+            $user_model = new Application_Model_User();
+            $this->view->users = $user_model->listUsers();
 
 
             $reply_model = new Application_Model_Replay();

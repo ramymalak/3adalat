@@ -81,6 +81,10 @@ class ForumController extends Zend_Controller_Action
       
       public function homeAction()
         { 
+          
+          $user_model = new Application_Model_User();
+          $this->view->users = $user_model->listUsers();
+          
           $system_model = new Application_Model_System();
           $system=$system_model->checkSystem();
           $this->view->system= $system; 

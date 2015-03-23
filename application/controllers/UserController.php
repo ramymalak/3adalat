@@ -64,6 +64,21 @@ class UserController extends Zend_Controller_Action
          
     }
 
+    public function profileotherAction()
+    {
+         // action body(
+  
+        $userId= $this->_request->getParam("userId"); 
+        $user_model = new Application_Model_User();
+        $this->view->user=$user_model->listOneUser($userId);
+        $this->render('profile');
+         
+    }
+
+    
+    
+    
+    
     public function deleteAction()
     {
         $authorization =Zend_Auth::getInstance(); 

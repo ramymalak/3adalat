@@ -10,6 +10,15 @@ echo "<br>";
 echo "<font color='red'>Thread Body : </font><br>";
 echo $this->thread[0]['threadBody'];
 echo "<br><br>";
+echo "<font color='red'> Author : </font>";
+ for($z = 0; $z<count($this->users); $z++){
+        if ($this->users[$z]['userID']==$this->thread[0]['userID']){
+             $name= $this->users[$z]['userName'];
+             $id= $this->users[$z]['userID'];
+             echo "<a  href=".$this->baseUrl()."/user/profileother/userId/".$id.">".$name."</a>";
+         }
+  }
+echo "<br><br>";
 echo "<font color='red'>Comment : </font><br>";
 
 if ($userInfo->isAdmin==1){//if he was admin
@@ -21,7 +30,7 @@ if ($userInfo->isAdmin==1){//if he was admin
 <textarea rows="5" cols="50" id="reply"></textarea><br/>
 <input type="button" value="add comment" onclick="addcomment()"></input>
 <input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
-<input type="text" id="user" value=<?php echo $thread['userID'] ?> hidden>  </input>
+<input type="text" id="user" value=<?php echo $userInfo->userID ?> hidden>  </input>
 <br/><br/>
 
 
@@ -34,7 +43,7 @@ if ($userInfo->isAdmin==1){//if he was admin
        <textarea rows="5" cols="50" id="reply"></textarea><br/>
        <input type="button" value="add comment" onclick="addcomment()"></input>
        <input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
-       <input type="text" id="user" value=<?php echo $thread['userID'] ?> hidden>  </input>
+       <input type="text" id="user" value=<?php echo $userInfo->userID ?> hidden>  </input>
        <br/><br/>
 
 <?php

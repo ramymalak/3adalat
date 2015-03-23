@@ -31,7 +31,15 @@ for($i = 0; $i<count($this->categories); $i++){
                             {
                                 if ($this->forums[$j]['forumID']==$this->threads[$k]->forumID)
                                 {
-                                    echo "<td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$k]->threadID.">".$this->threads[$k]->threadTitle."</a>&nbsp; &nbsp;".$this->threads[$k]->trreadDate." </td>" ;
+                                    for($z = 0; $z<count($this->users); $z++){
+                                        if ($this->users[$z]['userID']==$this->threads[$k]->userID){
+                                                $name=$this->users[$z]['userName'];
+                                                $id=$this->users[$z]['userID'];
+                                            }
+                                    }
+                                    echo "<td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$k]->threadID.">".$this->threads[$k]->threadTitle."</a>&nbsp; &nbsp;".$this->threads[$k]->trreadDate.
+                                            "&nbsp; &nbsp; <a  href=".$this->baseUrl()."/user/profileother/userId/".$id.">".$name."</a></td>" ;
+                                    
                                 }
                             }
                    echo "<tr>";  
