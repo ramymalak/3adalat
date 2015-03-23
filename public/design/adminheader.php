@@ -28,6 +28,7 @@
                 <li><a href="<?php echo $this->baseUrl()?>/Category/listall/"> Categories </a></li>
                 <li><a href="<?php echo $this->baseUrl()?>/Forum/listall/"> Forums </a></li>
                <li><a href="<?php echo $this->baseUrl()?>/Threads/list/"> Threads </a></li>
+               <li><a href="<?php echo $this->baseUrl()?>/Threads/mythread"> My Treads </a></li>
                <li><a href="<?php echo $this->baseUrl()?>/user/list/"> Users </a></li>
                <li><a href="<?php echo $this->baseUrl()?>/chat/index"> Chat </a></li>
             </ul>

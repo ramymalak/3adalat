@@ -135,6 +135,27 @@ class ThreadsController extends Zend_Controller_Action
             $this->view->reply = $reply;
 
         } 
+        
+        public function mythreadAction()
+    {
+         //allow this page only for admin
+         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+          
+        
+          //send all categories
+          $cat_model = new Application_Model_Category();
+          $categories=$cat_model->listCategories();
+          $this->view->categories = $categories;
+          //send all forums
+          $forum_model = new Application_Model_Forum();
+          $forums=$forum_model->listForums();
+          $this->view->forums = $forums;
+          //send all threads
+          $thread_model = new Application_Model_Thread();
+          $this->view->threads=$thread_model->getMyThreads($userInfo->userID);
+          
+
+    }
     
     
 }

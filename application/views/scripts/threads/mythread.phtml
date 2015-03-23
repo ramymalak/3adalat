@@ -1,0 +1,66 @@
+
+ <br />
+    <div class="container">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><h1><strong>All Threads</strong></h1></div>
+        <div class="panel-body">
+<?php
+//echo ($_SESSION["Zend_Auth"]["storage"]->isAdmin);
+echo "<table border=1  class='table table-responsive table-striped' style='text-align:center;'>";
+echo "<tr><td><b><font size='4' color='#8A6D3B'>Thread Title</font></td>"
+. "<td><b><font size='4' color='#8A6D3B'>Forum Name</font></b></td>"
+        . "<td><b><font size='4' color='#8A6D3B'>Category Name</font></b></td>"
+        . "<td><b><font size='4' color='#8A6D3B'>Action</font></b></td></tr>";
+for($i = 0; $i<count($this->threads); $i++){
+    
+    echo "<tr><td><a href=".$this->baseUrl()."/Threads/listonethread/thread_id/".$this->threads[$i]['threadID'].">"
+                    . $this->threads[$i]['threadTitle']."</a></td>"; 
+    //echo "<td>". $this->threads[$i]['threadBody']."</td>";
+    
+    for($j = 0; $j<count($this->forums); $j++){
+            if($this->forums[$j]['forumID']==$this->threads[$i]['forumID']){
+                 echo "<td><a class='success' href=".$this->baseUrl()."/Forum/listoneforum/forum_id/".$this->forums[$j]['forumID'].">". $this->forums[$j]['forumName']." </a></td>"; 
+           
+                 for($k = 0; $k<count($this->categories); $k++){
+                     if($this->forums[$j]['categoryID']==$this->categories[$k]['categoryID']){
+                         
+                         echo "<td><a href='".$this->baseUrl()."/Category/listonecategory/cat_id/".$this->categories[$k]['categoryID']."'>". $this->categories[$k]['categoryName']."</a></td>"; 
+                         
+                         
+                     }
+                     
+                 }
+                 
+                 
+            }
+            
+            
+            
+            
+    }
+    
+    echo "<td><a class='btn btn-success btn-xs' role='button'  href=".$this->baseUrl()."/Threads/edit/id/".$this->threads[$i]['threadID'].">Edit</a>";
+    echo " &nbsp;   <a  class='btn btn-warning btn-xs' role='button'  href=".$this->baseUrl()."/Threads/delete/id/".$this->threads[$i]['threadID'].">Delete</a>";
+    //
+    if($this->threads[$i]['isSticky']==1 && $_SESSION["Zend_Auth"]["storage"]->isAdmin){
+            echo " &nbsp;  <a class='btn btn-primary btn-xs' role='button' href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isSticky>Sticky</a>";
+    }  else if($_SESSION["Zend_Auth"]["storage"]->isAdmin) {
+            echo " &nbsp;   <a class='btn btn-info btn-xs' role='button'  href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isSticky>UnSticky</a>";
+
+    }
+    //
+    
+     if($this->threads[$i]['isLocked']==1 && $_SESSION["Zend_Auth"]["storage"]->isAdmin){
+            echo " &nbsp;   <a  class='btn btn-danger btn-xs' role='button' href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/0/column/isLocked>Locked</a></td></tr>";
+    }  else if($_SESSION["Zend_Auth"]["storage"]->isAdmin){
+            echo " &nbsp;   <a class='btn btn-default btn-xs' role='button' href=".$this->baseUrl()."/Threads/status/id/".$this->threads[$i]['threadID']."/status/1/column/isLocked>Unlocked</a></td></tr>";
+
+    }
+    
+    
+    //
+    }
+echo "</table>";
+?>  
+    </div>
+    </div>

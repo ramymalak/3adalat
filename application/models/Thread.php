@@ -74,6 +74,10 @@ class Application_Model_Thread extends Zend_Db_Table_Abstract
         return $row;
         
     }
+    function getMyThreads($id){
+        
+        return $this->fetchAll('userID ='.$id)->toArray();
+    }
     //////////////////////////////////////////
     
 }
