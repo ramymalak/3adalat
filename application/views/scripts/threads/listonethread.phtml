@@ -1,3 +1,4 @@
+<body>
 <?php
 $thread=$this->thread[0];
 
@@ -45,7 +46,9 @@ if ($userInfo->isAdmin==1){//if he was admin
        <input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
        <input type="text" id="user" value=<?php echo $userInfo->userID ?> hidden>  </input>
        <br/><br/>
-
+       
+       
+       <div id="replies">
 <?php
         
     }
@@ -70,7 +73,7 @@ if ($userInfo->isAdmin==1){//if he was admin
         }
 
 ?>
-<body>
+       </div>
 <script>
     
  function editrp(val){
@@ -159,7 +162,7 @@ function addcomment(){
   var controls=document.createElement("div");
     userdata.innerHTML="user num: "+document.getElementById("user").value;
     replaydata.innerHTML=newcomm.value;
-    document.body.appendChild(addnew);
+    document.getElementById('replies').appendChild(addnew);
     addnew.appendChild(userdata);
     addnew.appendChild(replaydata);
     addnew.appendChild(controls);
