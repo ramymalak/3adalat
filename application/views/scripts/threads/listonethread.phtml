@@ -48,8 +48,9 @@ if ($userInfo->isAdmin==1){//if he was admin
        <br/><br/>
        
        
-       <div id="replies">
+       
 <?php
+//echo "<div id=".'replies'.">";
         
     }
     
@@ -71,9 +72,9 @@ if ($userInfo->isAdmin==1){//if he was admin
                     echo "</div>";
             
         }
+//echo " </div>";
 
 ?>
-       </div>
 <script>
     
  function editrp(val){
@@ -162,7 +163,7 @@ function addcomment(){
   var controls=document.createElement("div");
     userdata.innerHTML="user num: "+document.getElementById("user").value;
     replaydata.innerHTML=newcomm.value;
-    document.getElementById('replies').appendChild(addnew);
+    document.body.appendChild(addnew);
     addnew.appendChild(userdata);
     addnew.appendChild(replaydata);
     addnew.appendChild(controls);

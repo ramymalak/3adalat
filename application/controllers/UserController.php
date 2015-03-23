@@ -16,7 +16,7 @@ class UserController extends Zend_Controller_Action
         // action body
     }
 
-     public function addAction()
+    public function addAction()
     {
         // action body
         $form  = new Application_Form_Signup();
@@ -33,7 +33,6 @@ class UserController extends Zend_Controller_Action
        
 	$this->view->form = $form;
     }
-
 
     public function listAction()
     {

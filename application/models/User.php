@@ -61,7 +61,6 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
 
 
-
     function listUsers(){
         
         return $this->fetchAll()->toArray();
@@ -103,7 +102,11 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     
     
     function deleteUser($userID){
-        
+        $filename=$this->find($userID)->toArray()[0]['photo'];
+//        echo "/var/www/html/3adalat/public"."/forum/".$filename;
+//        exit;
+        unlink('/var/www/html/3adalat/public'."/forum/".$filename);
+        //return;
         return $this->delete("userID=$userID");
     }
     

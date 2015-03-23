@@ -60,14 +60,17 @@ class Application_Form_Signup extends Zend_Form
 	$photo -> setAttrib("class","form-control");
         
         
-        $photo->setDestination("../public/img");
+        $photo->setDestination('/var/www/html/3adalat/public/forum');
         // ensure only one file
         $photo->addValidator('Count', false, 1);
+        $thedate = date_create();
+        $photo->addFilter('Rename', array('target' => $thedate->format('U = Y-m-d H:i:s')));
         // max 2MB
         $photo->addValidator('Size', false, 2097152)
               ->setMaxFileSize(2097152);
         // only JPEG, PNG, or GIF
-        $photo->addValidator('Extension', false, 'jpg,png,gif');
+        $photo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
+        $photo->receive();
         $photo->setValueDisabled(true);
         
         
