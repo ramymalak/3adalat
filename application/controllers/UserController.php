@@ -235,8 +235,67 @@ class UserController extends Zend_Controller_Action
          $this->redirect("user/login");
          
     }
-
-   
+    
+    public function sendmsgAction()
+    {
+        // action body
+        $form  = new Application_Form_Message();
+       
+       if($this->_request->isPost()){
+           if($form->isValid($this->_request->getParams())){
+               $msg_info = $form->getValues();
+               $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+               function objectToArray($d){
+                    if (is_object($d)){
+                        $d = get_object_vars($d);
+                        return $d;
+                       }       
+                   }
+                $userInfoArray = objectToArray($userInfo);   
+                $senderId = $userInfoArray['userID'];
+                $userModel = new Application_Model_User();
+                $recieverId = $userModel->getUserIdByName($msg_info['messageReviever']);
+                $body  =  $msg_info['messageBody'];
+                $msg_model = new Application_Model_Message();
+                $msg_model->sendMessage($senderId, $recieverId, $body);
+           }
+       }
+       
+	$this->view->form = $form;
+        
+    }  
+    public function listmsgAction()
+    {
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+               function objectToArray($d){
+                    if (is_object($d)){
+                        $d = get_object_vars($d);
+                        return $d;
+                       }       
+                   }
+                $userInfoArray = objectToArray($userInfo);   
+                $userId = $userInfoArray['userID'];
+        $message_model = new Application_Model_Message();
+        $data = $message_model->listMessages($userId);
+        $this->view->data = $message_model->listMessages($userId);     
+        
+    }
+    
+    public function seenAction()
+    {
+        $authorization =Zend_Auth::getInstance(); 
+        if(!$authorization->hasIdentity()) 
+            { $this->redirect("user/login"); }
+        // action body
+        $msgid = $this->_request->getParam("msgID");
+        if(!empty($id)){
+            $msg_model = new Application_Model_Message();
+            $msg_model->invseen($msgid);
+            
+        }
+        $this->redirect("user/listmsg");
+    }
+    
 
 
 }

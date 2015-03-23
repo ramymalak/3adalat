@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><h1><strong>Messages</strong></h1></div>
+        <div class="panel-body">
+<?php
+//var_dump($this->data);
+
+$user_model = new Application_Model_User();
+echo '<table>';
+    foreach ($this->data as $msg)
+        {
+            echo '<tr><td>';
+            echo $user_model->getUserNameById($msg['messageSender']);
+            echo ':'.$msg['messageBody'];
+            echo'</td></tr>'; 
+            
+          
+        }
+        echo '</table>';
+         ?>
+
+            <div></div><div>   
