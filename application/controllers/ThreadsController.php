@@ -74,7 +74,8 @@ class ThreadsController extends Zend_Controller_Action
         
         $id = $this->_request->getParam("id");
         $form  = new Application_Form_Thread();
-        
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+
         if($this->_request->isPost()){
            if($form->isValid($this->_request->getParams())){
                $thread_info = $form->getValues();
@@ -82,8 +83,13 @@ class ThreadsController extends Zend_Controller_Action
                //exit;
                $thread_model = new Application_Model_Thread();
                $thread_model->editTread($thread_info,$id);
-               
-                       
+               //
+              if ($userInfo->isAdmin==1){
+                   $this->redirect("Threads/list/");
+               }else{
+                   $this->redirect("Threads/mythread/");
+               }
+               //        
            }
         }
         if(!empty($id)){
