@@ -26,7 +26,8 @@ $userInfo = Zend_Auth::getInstance()->getStorage()->read();
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo $this->baseUrl()?>/Forum/home/">Home</a></li>
                 <li><a href="<?php echo $this->baseUrl()?>/Threads/mythread"> My Treads </a></li>
-                <li><a href="<?php echo $this->baseUrl()?>/user/profile/"> Profile </a></li>   
+                <li><a href="<?php echo $this->baseUrl()?>/user/profile/"> Profile </a></li> 
+                <li><a href="<?php echo $this->baseUrl()?>/user/sendmsg"> send private message </a></li>
                 <li><a href="<?php echo $this->baseUrl()?>/chat/index"> Chat </a></li>
             </ul>
            
