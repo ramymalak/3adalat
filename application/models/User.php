@@ -66,26 +66,26 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         return $this->fetchAll()->toArray();
     }
     
+    
     function listOneUser($id){
         
         return $this->fetchAll("userID = $id")->toArray();
     }
     
-    
-    function getUserById($userID){
+    ////////////////////////////// Helping Functions /////////////////////////////
+    function getUserById($userID)
+    {
         return $this->find($userID)->toArray();
     }
-    
     function  getUserIdByName($userName)
     {
          return $this->fetchAll("userEmail = '$userName'")->toArray()[0]['userID'];
     }
-    
-    function getUserNameById($id){
-        
+    function getUserNameById($id)
+    {   
         return $this->fetchAll("userID = $id")->toArray()[0]['userName'];
     }
-    
+    ///////////////////////////////////////////////////////////////////////////////
     
      function editUser($data,$theid){
          

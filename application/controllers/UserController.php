@@ -232,15 +232,13 @@ class UserController extends Zend_Controller_Action
         if(!$authorization->hasIdentity()) 
             { $this->redirect("user/login"); }
          session_destroy();
-         $this->redirect("user/login");
-         
+         $this->redirect("user/login");      
     }
     
     public function sendmsgAction()
     {
         // action body
         $form  = new Application_Form_Message();
-       
        if($this->_request->isPost()){
            if($form->isValid($this->_request->getParams())){
                $msg_info = $form->getValues();
@@ -260,10 +258,9 @@ class UserController extends Zend_Controller_Action
                 $msg_model->sendMessage($senderId, $recieverId, $body);
            }
        }
-       
-	$this->view->form = $form;
-        
+	$this->view->form = $form;     
     }  
+    
     public function listmsgAction()
     {
         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
@@ -278,49 +275,28 @@ class UserController extends Zend_Controller_Action
         $message_model = new Application_Model_Message();
         $message_model->setSeen();
         $message_model->checkForSeen();
-        $data = $message_model->listMessages($userId);
-        $this->view->data = $message_model->listMessages($userId);
-        
-        
-        
+        $this->view->data = $message_model->listMessages($userId);    
     }
     
     public function seenAction()
     {
         $authorization =Zend_Auth::getInstance(); 
         if(!$authorization->hasIdentity()) 
-            { $this->redirect("user/login"); }
-        // action body
+        {
+            $this->redirect("user/login"); 
+        }
         $msgid = $this->_request->getParam("msgID");
-        if(!empty($id)){
+        if(!empty($msgid)){
             $msg_model = new Application_Model_Message();
-            $msg_model->invseen($msgid);
-            
+            $msg_model->invseen($msgid);      
         }
         $this->redirect("user/listmsg");
     }
-    
     
     public function unseenAction()
     {
         $msg_model = new Application_Model_Message();
         $result = $msg_model->checkForSeen();
-        $this->redirect("Forum/home/seen/$result");
-        
+        $this->redirect("Forum/home/seen/$result");   
     }
-    
-    
-
-
 }
-
-
-
-
-
-
-
-
-
-
-

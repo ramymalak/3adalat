@@ -16,7 +16,6 @@ class Application_Model_Message extends Zend_Db_Table_Abstract
     
     function listMessages($messageRecieverId){
         
-        //return $this->fetchAll()->toArray();
         return $this->fetchAll("messageReciever = $messageRecieverId")->toArray();
     }
     
@@ -49,22 +48,5 @@ class Application_Model_Message extends Zend_Db_Table_Abstract
              }
          }
          return $flag;
-         //var_dump($msgSeenFlags);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
 }
-
