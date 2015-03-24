@@ -105,11 +105,7 @@ class ForumController extends Zend_Controller_Action
                 $threads[] =$thread;
             }
           }
-         $this->view->threads = $threads;          
-     
-          
-           
-            
+         $this->view->threads = $threads;             
         }
         
       public function listallAction()
@@ -214,8 +210,7 @@ class ForumController extends Zend_Controller_Action
         $forum_model = new Application_Model_Forum();
         $forum=$forum_model->getForumById($forum_id);
         $this->view->forum = $forum;
-        
-       
+
         $thread_model = new Application_Model_Thread();
         $threads=$thread_model->listThreadsByForumId($forum_id);
         $this->view->threads = $threads;
@@ -258,11 +253,5 @@ class ForumController extends Zend_Controller_Action
        $system_model = new Application_Model_System();
        $system_model->updateStatus();
        $this->redirect("Forum/home");
-    }
-    
-    
+    }   
 }
-
-
-
-

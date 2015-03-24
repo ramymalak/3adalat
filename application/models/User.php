@@ -1,6 +1,5 @@
 <?php
 
-
 class Application_Model_User extends Zend_Db_Table_Abstract
 {
     // Define table name
@@ -87,22 +86,26 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     ///////////////////////////////////////////////////////////////////////////////
     
-     function editUser($data,$theid){
-         
-        if(empty($data['photo'])){
+    function editUser($data,$theid)
+    {
+        if(empty($data['photo']))
+        {
             unset ($data['photo']);
         }
-         
-        if(!empty($data['password'])){
-            if($data['password']==$data['passwordConfirm']){
+        if(!empty($data['password']))
+        {
+            if($data['password']==$data['passwordConfirm'])
+            {
                 $data['password']=md5($data['password']);
                 unset ($data['passwordConfirm']);
-                
-            }else{
+            }
+            else
+            {
                 return 1;
             }
-            
-        }else{
+        }
+        else
+        {
             unset ($data['password']);
             unset ($data['passwordConfirm']);
         }
@@ -113,10 +116,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     
     function deleteUser($userID){
         $filename=$this->find($userID)->toArray()[0]['photo'];
-//        echo "/var/www/html/3adalat/public"."/forum/".$filename;
-//        exit;
         unlink('/var/www/html/3adalat/public'."/forum/".$filename);
-        //return;
         return $this->delete("userID=$userID");
     }
     
@@ -140,9 +140,5 @@ class Application_Model_User extends Zend_Db_Table_Abstract
            $data['isAdmin']=true; 
         }
         return $this->update($data, "userID=".$userID);
-    }
-    
-    
-    
+    }   
 }
-
