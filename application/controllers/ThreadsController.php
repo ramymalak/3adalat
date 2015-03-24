@@ -146,7 +146,9 @@ class ThreadsController extends Zend_Controller_Action
     {
          //allow this page only for admin
          $userInfo = Zend_Auth::getInstance()->getStorage()->read();
-          
+         
+        $user_model = new Application_Model_User();
+        $this->view->users = $user_model->listUsers();
         
           //send all categories
           $cat_model = new Application_Model_Category();

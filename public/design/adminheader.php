@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li ><a href="<?php echo $this->baseUrl()?>/Forum/home/">Home</a></li>
-                <li><a href="<?php echo $this->baseUrl()?>/user/profile/"> Profile </a></li> 
+                <li><a id='profile' href="<?php echo $this->baseUrl()?>/user/profile/"> Profile </a></li> 
                 <li><a href="<?php echo $this->baseUrl()?>/Category/listall/"> Categories </a></li>
                 <li><a href="<?php echo $this->baseUrl()?>/Forum/listall/"> Forums </a></li>
                <li><a href="<?php echo $this->baseUrl()?>/Threads/list/"> Threads </a></li>
@@ -37,8 +37,8 @@
             
 
              <ul class="nav navbar-nav navbar-right">
-                <li><a href=""><?php echo $userInfo->userName; ?></a></li>
-                <li><img class="image" src='<?php echo $this->baseUrl()."/forum/".$userInfo->photo;?>' width="50px" height="50px"/></li>
+                <li><a id="name"  href="<?php echo $this->baseUrl()?>/user/profile/"><?php echo $userInfo->userName; ?></a></li>
+                <li><img class="image" id='img' src='<?php echo $this->baseUrl()."/forum/".$userInfo->photo;?>' width="50px" height="50px"/></li>
                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">

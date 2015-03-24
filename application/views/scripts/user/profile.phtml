@@ -5,8 +5,9 @@
            <?php                                                                                                                                   
            $userInfo = Zend_Auth::getInstance()->getStorage()->read();
 //           var_dump($userInfo);
+           if($this->user[0]['userID']==$userInfo->userID){
            echo "<a class='btn btn-info' href='".$this->baseUrl()."/user/edit/userID/".$userInfo->userID."'>Edit</a>";
-           
+           }
            echo "<div class='col-md-2'><img width='120px' height='120px' class='img img-circle' src='".$this->baseUrl()."/forum/".$this->user[0]['photo']."'> <br /></div>";
            echo "<div class='col-md-8'> <div class='panel panel-warning'> <div class='panel-body'>";
            echo "<table>";

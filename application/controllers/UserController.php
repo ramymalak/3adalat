@@ -143,9 +143,15 @@ class UserController extends Zend_Controller_Action
                //var_dump($user_info);
                //exit;
                $user_model = new Application_Model_User();
-               $user_model->editUser($user_info,$userID);
+               $user_model->editUser($user_info,$userID);                
+               $user = Zend_Auth::getInstance()->getStorage()->read(); 
+               $user->userName=$user_info['userName'];
+               if(!empty($user_info['photo'])){
+                   unlink('/var/www/html/3adalat/public'."/forum/".$user->photo);
+                   $user->photo=$user_info['photo'];
+               }
                
-                    
+              $this->redirect("user/profile");      
            }
        }
        if(!empty($userID)){
