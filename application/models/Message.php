@@ -31,6 +31,38 @@ class Application_Model_Message extends Zend_Db_Table_Abstract
         return $this->update($data, "MessageID=".$MessageID);
     }
     
+    function setSeen()
+    {
+        $data['seenFlag'] = true;
+        return $this->update($data,"");
+    }
+    
+    function checkForSeen()
+    {
+         $msgSeenFlags = $this->fetchAll()->toArray();
+         $flag =1;
+         for($i = 0 ; $i<count($msgSeenFlags);$i++)
+         {
+             if(!$msgSeenFlags[$i]['seenFlag'])
+             {
+                 $flag = 0;
+             }
+         }
+         return $flag;
+         //var_dump($msgSeenFlags);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
 

@@ -13,6 +13,27 @@ if ($userInfo->isAdmin==1){
 }
 
 ?>
+<?php
+
+//if(! $this->seen)
+//{
+//    echo "<a class='col-sm-offset-5 btn btn-warning btn-xs' role='button' href='".$this->baseUrl()."/user/listmsg'><font size='5'>New Messages</font></a>";
+//}
+//else
+//{
+    $msgmodel = new Application_Model_Message();
+    $result= $msgmodel->checkForSeen();
+    if($result)
+    {
+        echo "<a class='col-sm-offset-5 btn btn-default btn-xs' role='button' href='".$this->baseUrl()."/user/listmsg'><font size='5'>No New Messages</font></a>";
+    }
+ else {
+        echo "<a class='col-sm-offset-5 btn btn-warning btn-xs' role='button' href='".$this->baseUrl()."/user/listmsg'><font size='5'>New Messages</font></a>";
+    }
+    
+//}
+
+?>
 <br/><br>
 <div class="container  col-sm-10 col-sm-offset-1">
     <div class="panel panel-warning">
@@ -48,6 +69,10 @@ for($i = 0; $i<count($this->categories); $i++){
          echo "</table><br>";    
          echo "</div></div>";
 }
+
+
+
+
 ?>
         </div></div>
 </div>

@@ -267,17 +267,21 @@ class UserController extends Zend_Controller_Action
     public function listmsgAction()
     {
         $userInfo = Zend_Auth::getInstance()->getStorage()->read();
-               function objectToArray($d){
+               function objectTooArray($d){
                     if (is_object($d)){
                         $d = get_object_vars($d);
                         return $d;
                        }       
                    }
-                $userInfoArray = objectToArray($userInfo);   
+                $userInfoArray = objectTooArray($userInfo);   
                 $userId = $userInfoArray['userID'];
         $message_model = new Application_Model_Message();
+        $message_model->setSeen();
+        $message_model->checkForSeen();
         $data = $message_model->listMessages($userId);
-        $this->view->data = $message_model->listMessages($userId);     
+        $this->view->data = $message_model->listMessages($userId);
+        
+        
         
     }
     
@@ -295,6 +299,16 @@ class UserController extends Zend_Controller_Action
         }
         $this->redirect("user/listmsg");
     }
+    
+    
+    public function unseenAction()
+    {
+        $msg_model = new Application_Model_Message();
+        $result = $msg_model->checkForSeen();
+        $this->redirect("Forum/home/seen/$result");
+        
+    }
+    
     
 
 

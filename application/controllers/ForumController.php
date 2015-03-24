@@ -81,7 +81,7 @@ class ForumController extends Zend_Controller_Action
       
       public function homeAction()
         { 
-          
+          $this->view->seen = $this->_request->getParam('seen');
           $user_model = new Application_Model_User();
           $this->view->users = $user_model->listUsers();
           
