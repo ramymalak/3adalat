@@ -1,4 +1,23 @@
 <body>
+    
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '891589220903177',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    
     <div class="panel panel-default panel-body col-sm-7 col-sm-offset-2">
 <?php
 $thread=$this->thread[0];
@@ -31,7 +50,12 @@ if ($userInfo->isAdmin==1){//if he was admin
 <input type="text" id="thread_id" value=<?php echo $thread['threadID'] ?> hidden>  </input>
 <input type="text" id="user" value=<?php echo $userInfo->userID ?> hidden>  </input>
 <br/><br/>
-
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 
 <?php
 }  else {//normal user
