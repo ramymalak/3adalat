@@ -24,9 +24,10 @@ class UserController extends Zend_Controller_Action
        if($this->_request->isPost()){
            if($form->isValid($this->_request->getParams())){
                $user_info = $form->getValues();
-               echo"for is valid and post";
+               //echo"for is valid and post";
                $user_model = new Application_Model_User();
                $user_model->addUser($user_info);
+               $this->redirect("user/usradded");
                
            }
        }
@@ -310,4 +311,9 @@ class UserController extends Zend_Controller_Action
         $result = $msg_model->checkForSeen();
         $this->redirect("Forum/home/seen/$result");   
     }
+    public function usraddedAction()
+    {
+        
+    }
+    
 }
