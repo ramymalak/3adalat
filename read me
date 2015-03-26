@@ -1,0 +1,3 @@
+to enable the chat feature run the web socket server->php  server.php
+
+http://localhost/3adalat/public/user/login
