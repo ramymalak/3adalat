@@ -216,9 +216,16 @@ function addcomment(){
     
     
     var mysup=document.createElement("sup");
-    mysup.innerHTML=document.getElementById("name").innerHTML;
-
-    //mysup.appendChild(link);
+    //mysup.innerHTML=document.getElementById("name").innerHTML;
+var mylink=document.createElement("a");
+var myfont=document.createElement("font");
+myfont.setAttribute("size","2");
+console.log(document.getElementById('profile').href);
+mylink.setAttribute("href",document.getElementById('profile').href);
+mylink.innerHTML=document.getElementById("name").innerHTML;
+    myfont.appendChild(mylink);
+        mysup.appendChild(myfont);
+    
     addnew.appendChild(myimg);
     addnew.appendChild(mysup);
     addnew.appendChild(replaydata);
