@@ -27,7 +27,7 @@ class UserController extends Zend_Controller_Action
                echo"for is valid and post";
                $user_model = new Application_Model_User();
                $user_model->addUser($user_info);
-                       
+               
            }
        }
        
@@ -145,6 +145,9 @@ class UserController extends Zend_Controller_Action
                $user_model = new Application_Model_User();
                $user_model->editUser($user_info,$userID);                
                $user = Zend_Auth::getInstance()->getStorage()->read();
+//               var_dump($user_info);
+//               var_dump($user);
+//               exit;
               if($user_info['userID']==$user->userID){
                $user->userName=$user_info['userName'];
                if(!empty($user_info['photo'])){
@@ -153,7 +156,7 @@ class UserController extends Zend_Controller_Action
                }
            }
                
-              $this->redirect("user/profile");      
+              $this->redirect("user/profileother/userId/".$user_info['userID']);      
            }
        }
        if(!empty($userID)){

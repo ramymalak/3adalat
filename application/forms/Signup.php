@@ -11,6 +11,7 @@ class Application_Form_Signup extends Zend_Form
         
 //        $userID = new Zend_Form_Element_Hidden("userID");
 //        $userID->setAttrib("value", "9");
+        $userID = new Zend_Form_Element_Hidden('userID');
         
 	$username = new Zend_Form_Element_Text("userName");
         $username -> setRequired()-> setLabel("Username: ");
@@ -90,7 +91,7 @@ class Application_Form_Signup extends Zend_Form
             'Female' => 'Female'
         ));
         
-	$this->addElements(array($username,$email,$password,$passwordConfirm,$country,$gender,$photo,$submit,$reset));
+	$this->addElements(array($userID,$username,$email,$password,$passwordConfirm,$country,$gender,$photo,$submit,$reset));
 	
     }
 
